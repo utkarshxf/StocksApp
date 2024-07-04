@@ -36,18 +36,22 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.ExploreScreen.route) {
                             ExploreScreen()
                             {
-//                                navController.currentBackStackEntry?.savedStateHandle?.set(
-//                                    key = "data-mapped", value = it
-//                                )
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    key = "data-mapped", value = it
+                                )
                                 navController.navigate(Screen.ProductScreen.route)
+
                             }
                         }
                         composable(route = Screen.ProductScreen.route) {
-//                            val data =
-//                                navController.previousBackStackEntry
-//                                    ?.savedStateHandle
-//                                    ?.get<String?>("data-mapped")
-                            ProductScreen()
+                            val data =
+                                navController.previousBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.get<String?>("data-mapped")
+                            if (data != null) {
+                                ProductScreen(data)
+                            }
+
                         }
                     }
                 }

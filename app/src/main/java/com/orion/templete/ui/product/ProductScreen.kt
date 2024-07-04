@@ -1,5 +1,6 @@
 package com.orion.templete.ui.product
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,14 +39,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.orion.templete.R
 import com.orion.templete.data.model.CompanyOverviewDTO
+import kotlin.math.log
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
 fun ProductScreen(
+    title: String,
     modifier: Modifier = Modifier,
     viewModel: ProductScreenViewModel = hiltViewModel()
 ) {
+
     val state = viewModel.stateOfCompanyOverview.value
 
     val companyOverview = state.data ?: return
