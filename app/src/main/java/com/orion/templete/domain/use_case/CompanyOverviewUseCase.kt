@@ -26,10 +26,13 @@ class CompanyOverviewUseCase @Inject constructor(
             } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
-        }
-        else {
-            val companyOverview = companyOverviewDatabase.companyOverviewDao().getCompanyOverview()
-            emit(StateHandle.Success(companyOverview))
+        } else {
+            try {
+                val companyOverview = companyOverviewDatabase.companyOverviewDao().getCompanyOverview()
+                emit(StateHandle.Success(companyOverview))
+            } catch (e: Exception) {
+                emit(StateHandle.Error("No internet connection and no cached data found."))
+            }
         }
     }
 }
