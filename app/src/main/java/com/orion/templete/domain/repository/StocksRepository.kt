@@ -5,5 +5,5 @@ import com.orion.templete.data.model.TopGainLoseDTO
 
 interface StocksRepository {
     suspend fun getTopGainerLoser(): TopGainLoseDTO
-    suspend fun companyOverview(): CompanyOverviewDTO
+    suspend fun companyOverview(title: String): CompanyOverviewDTO
 }

@@ -14,8 +14,8 @@ class StocksRepositoryImplementation @Inject constructor(private val apiService:
         return response
     }
 
-    override suspend fun companyOverview(): CompanyOverviewDTO {
-        val response = safeApiRequest { apiService.getCompanyOverview() }
+    override suspend fun companyOverview(title: String): CompanyOverviewDTO {
+        val response = safeApiRequest { apiService.getCompanyOverview(title) }
         return response
     }
 }

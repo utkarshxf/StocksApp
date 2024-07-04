@@ -10,13 +10,13 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("query?function=TOP_GAINERS_LOSERS")
     suspend fun getCompanyInfo(
-        @Query("apikey") apiKey: String = API_KEY
+        @Query("apikey") apiKey: String = "API_KEY"
     ):retrofit2.Response<TopGainLoseDTO>
 
     @GET("query?function=OVERVIEW")
     suspend fun getCompanyOverview(
-        @Query("symbol") ticker: String = "IBM",
-        @Query("apikey") apiKey: String = API_KEY
+        @Query("symbol") ticker: String = "DECAW",
+        @Query("apikey") apiKey: String = "API_KEY"
     ):retrofit2.Response<CompanyOverviewDTO>
 
     companion object {

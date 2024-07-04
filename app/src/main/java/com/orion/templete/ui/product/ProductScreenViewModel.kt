@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.domain.use_case.CompanyOverviewUseCase
-import com.orion.templete.domain.use_case.TopGainerLoserUseCase
-import com.orion.templete.ui.explore.ExploreScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,10 +14,10 @@ import javax.inject.Inject
 class ProductScreenViewModel @Inject constructor(private val useCase: CompanyOverviewUseCase) : ViewModel() {
     val stateOfCompanyOverview = mutableStateOf(ProductScreenState())
     init {
-        getCompanyOverview()
+//        getCompanyOverview("IBM")
     }
-     fun getCompanyOverview() {
-        useCase().onEach {
+     fun getCompanyOverview(title: String) {
+        useCase(title).onEach {
             when(it){
                 is StateHandle.Loading -> {
                     stateOfCompanyOverview.value = ProductScreenState(isLoading = true)
