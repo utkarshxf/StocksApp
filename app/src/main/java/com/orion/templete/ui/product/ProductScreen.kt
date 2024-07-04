@@ -36,11 +36,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.common.collect.ImmutableList
 import com.orion.templete.R
 import com.orion.templete.data.model.CompanyOverviewDTO
-import com.orion.templete.domain.use_case.DataPoint
-import com.orion.templete.ui.components.LineChart
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,17 +58,7 @@ fun ProductScreen(
         Column(modifier = Modifier.padding(it))
         {
 
-            val data1Day = DataPoint(
-                y = companyOverview.`200DayMovingAverage`.toDouble(),
-                xLabel = "1 Day",
-                yLabel = companyOverview.`200DayMovingAverage`.toString()
-            )
             CompanyDetails(companyOverview)
-            LineChart(
-                Modifier,
-                data = ImmutableList.of(data1Day),
-                showDashedLine = true
-            )
             AboutCompany(companyOverview)
         }
     })
@@ -106,7 +93,7 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
                     ),
             )
             {
-                Text(text = companyOverview.Description , modifier = Modifier.padding(16.dp))
+                Text(text = companyOverview.Description, modifier = Modifier.padding(16.dp))
                 SectionInfoItem(
                     name = "CIK",
                     value = companyOverview.CIK,
@@ -269,19 +256,19 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
                 )
                 SectionInfoItem(
                     name = "52 Week High",
-                    value = companyOverview.`52WeekHigh`.toString()
+                    value = companyOverview.weekHigh52.toString()
                 )
                 SectionInfoItem(
                     name = "52 Week Low",
-                    value = companyOverview.`52WeekLow`.toString()
+                    value = companyOverview.weekLow52.toString()
                 )
                 SectionInfoItem(
                     name = "50 Day Moving Average",
-                    value = companyOverview.`200DayMovingAverage`.toString()
+                    value = companyOverview.movingAverage200Day.toString()
                 )
                 SectionInfoItem(
                     name = "200 Day Moving Average",
-                    value = companyOverview.`50DayMovingAverage`.toString()
+                    value = companyOverview.movingAverage50Day.toString()
                 )
                 SectionInfoItem(
                     name = "Shares Outstanding",
@@ -314,9 +301,9 @@ fun CompanyDetails(companyOverview: CompanyOverviewDTO) {
         Row(verticalAlignment = Alignment.CenterVertically)
         {
             AssetIcon()
-            TickerName(companyOverview.Name ,companyOverview.Exchange)
+            TickerName(companyOverview.Name, companyOverview.Exchange)
         }
-        ValueView(companyOverview.CIK.toFloat() ,companyOverview.BookValue.toFloat())
+        ValueView(companyOverview.CIK.toFloat(), companyOverview.BookValue.toFloat())
     }
 }
 

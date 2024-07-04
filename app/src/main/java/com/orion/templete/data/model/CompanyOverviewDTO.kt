@@ -1,10 +1,21 @@
 package com.orion.templete.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity(tableName = "company_overview_db")
 data class CompanyOverviewDTO(
-    val `200DayMovingAverage`: String,
-    val `50DayMovingAverage`: String,
-    val `52WeekHigh`: String,
-    val `52WeekLow`: String,
+    @PrimaryKey(autoGenerate = true)
+    val objectId:Int,
+    @SerializedName("200DayMovingAverage")
+    val movingAverage200Day: String,
+    @SerializedName("50DayMovingAverage")
+    val movingAverage50Day: String,
+    @SerializedName("52WeekHigh")
+    val weekHigh52: String,
+    @SerializedName("52WeekLow")
+    val weekLow52: String,
     val Address: String,
     val AnalystRatingBuy: String,
     val AnalystRatingHold: String,

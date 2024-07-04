@@ -19,7 +19,6 @@ interface ApiService {
         @Query("apikey") apiKey: String = API_KEY
     ):retrofit2.Response<CompanyOverviewDTO>
 
-
     companion object {
         const val API_KEY = "4DSA5UJD8HL9NWH0"
         const val BASE_URL = "https://alphavantage.co"

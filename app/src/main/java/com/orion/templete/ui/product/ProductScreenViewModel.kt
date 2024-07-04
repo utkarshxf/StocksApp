@@ -18,7 +18,7 @@ class ProductScreenViewModel @Inject constructor(private val useCase: CompanyOve
     init {
         getCompanyOverview()
     }
-    private fun getCompanyOverview() {
+     fun getCompanyOverview() {
         useCase().onEach {
             when(it){
                 is StateHandle.Loading -> {

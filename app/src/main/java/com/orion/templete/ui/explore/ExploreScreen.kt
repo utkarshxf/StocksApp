@@ -35,7 +35,7 @@ import com.orion.templete.ui.components.StockCard
 @Composable
 fun ExploreScreen(
     viewModel: ExploreScreenViewModel = hiltViewModel(),
-    navigateToProductScreen: () -> Unit = {}
+    navigateToProductScreen:() -> Unit = {}
 ) {
     val state = viewModel.stateOfTopGainersLosers.value
     var TopLosers by remember { mutableStateOf(false) }
