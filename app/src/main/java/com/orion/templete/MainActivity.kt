@@ -12,8 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.orion.templete.domain.use_case.Screen
-import com.orion.templete.presentation.MainScreen
-import com.orion.templete.presentation.ui.theme.TempleteTheme
+import com.orion.templete.ui.explore.ExploreScreen
+import com.orion.templete.ui.product.ProductScreen
+import com.orion.templete.ui.theme.TempleteTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,10 +31,16 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.MainScreen.route
+                        startDestination = Screen.ExploreScreen.route
                     ) {
-                        composable(route = Screen.MainScreen.route) {
-                            MainScreen()
+                        composable(route = Screen.ExploreScreen.route) {
+                            ExploreScreen()
+                            {
+                                navController.navigate(Screen.ProductScreen.route)
+                            }
+                        }
+                        composable(route = Screen.ProductScreen.route) {
+                            ProductScreen()
                         }
                     }
                 }
