@@ -5,6 +5,10 @@ package com.orion.templete.ui.components
 import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -13,15 +17,14 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.google.common.collect.ImmutableList
 import com.orion.templete.domain.use_case.DataPoint
-
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun LineChart(
     modifier: Modifier = Modifier,
     data: ImmutableList<DataPoint>,
-    graphColor: Color = Color.Black,
+    graphColor: Color = MaterialTheme.colorScheme.primary,
     showDashedLine: Boolean,
     showYLabels: Boolean = false
 ) {
@@ -44,35 +47,9 @@ fun LineChart(
 
     val density = LocalDensity.current
 
-    Canvas(modifier = modifier) {
-
+    Canvas(modifier = modifier.fillMaxWidth().height(200.dp)) {  // Add fillMaxSize or specify a fixed size
         val spacePerHour = (size.width - spacing) / data.size
-        /*
-        (0 until data.size - 1 step 2).forEach { i ->
-            val info = data[i]
-            val hour = info.xLabel
-            drawContext.canvas.nativeCanvas.apply {
-                drawText(
-                    hour.toString(),
-                    spacing + i * spacePerHour,
-                    size.height - 5,
-                    textPaint
-                )
-            }
-        }
-        val priceStep = (upperValue - lowerValue) / 5f
-        (0..4).forEach { i ->
-            drawContext.canvas.nativeCanvas.apply {
-                drawText(
-                    round(lowerValue + priceStep * i).toString(),
-                    30f,
-                    size.height - spacing - i * size.height / 5f,
-                    textPaint
-                )
-            }
-        }
 
-         */
         var lastX = 0f
         var firstY = 0f
         val strokePath = Path().apply {
@@ -169,7 +146,6 @@ fun LineChart(
                     textPaint
                 )
             }
-
         }
     }
 }

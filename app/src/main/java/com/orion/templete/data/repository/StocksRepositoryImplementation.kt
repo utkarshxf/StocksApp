@@ -1,6 +1,7 @@
 package com.orion.templete.data.repository
 
 import com.orion.templete.data.model.CompanyOverviewDTO
+import com.orion.templete.data.model.StockDataDTO
 import com.orion.templete.data.model.TopGainLoseDTO
 import com.orion.templete.domain.repository.StocksRepository
 import com.orion.templete.util.SafeApiRequest
@@ -15,7 +16,12 @@ class StocksRepositoryImplementation @Inject constructor(private val apiService:
     }
 
     override suspend fun companyOverview(title: String): CompanyOverviewDTO {
-        val response = safeApiRequest { apiService.getCompanyOverview(title) }
+        val response = safeApiRequest { apiService.getCompanyOverview("IBM") }
+        return response
+    }
+
+    override suspend fun getStockData(): StockDataDTO {
+        val response = safeApiRequest { apiService.getStockData() }
         return response
     }
 }
