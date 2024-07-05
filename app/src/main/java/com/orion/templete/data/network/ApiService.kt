@@ -20,14 +20,14 @@ interface ApiService {
         @Query("apikey") apiKey: String = "demo"
     ):retrofit2.Response<CompanyOverviewDTO>
 
+
     //StockDataDTO
-//    https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
     @GET("query")
     suspend fun getStockData(
         @Query("function") function: String,
-        @Query("symbol") symbol: String,
-        @Query("interval") interval: String? = null,
-        @Query("apikey") apiKey: String
+        @Query("symbol") symbol: String ,
+        @Query("interval") interval: String? ,
+        @Query("apikey") apiKey: String = "demo"
     ):retrofit2.Response<StockDataDTO>
 
 

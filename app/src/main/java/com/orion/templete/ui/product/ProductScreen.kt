@@ -27,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -64,8 +65,14 @@ fun ProductScreen(
     modifier: Modifier = Modifier,
     viewModel: ProductScreenViewModel = hiltViewModel()
 ) {
+    var selectedIndex by remember { mutableStateOf(0) }
+    var function  by remember { mutableStateOf("TIME_SERIES_INTRADAY") }
+    var interval  by remember { mutableStateOf<String?>("5min")}
     LaunchedEffect(key1 = title) {
         viewModel.getCompanyOverview(title)
+    }
+    LaunchedEffect(key1 = selectedIndex) {
+        viewModel.getStockData(function,"IBM",interval)
     }
     val stateOfCompanyOverview = viewModel.stateOfCompanyOverview.value
     val stateOfStockData = viewModel.stateOfStockData.value
@@ -92,7 +99,10 @@ fun ProductScreen(
                     )
                 )
             }, content = {
-                LazyColumn(modifier = Modifier.padding(it).padding(15.dp)) {
+
+                LazyColumn(modifier = Modifier
+                    .padding(it)
+                    .padding(15.dp)) {
                     item {
                         CompanyDetails(stateOfCompanyOverview.data)
                     }
@@ -101,35 +111,52 @@ fun ProductScreen(
                             visible = stateOfStockData.data != null,
                             exit = ExitTransition.None
                         ) {
-                            val dataPoints = prepareDataPoints(stateOfStockData.data!!)
-                            LineChart(
-                                data = dataPoints.toImmutableList(),
-                                showDashedLine = true,
-                                showYLabels = true
-                            )
+                            when{
+                                stateOfStockData.data!=null -> {
+                                    val dataPoints = prepareDataPoints(stateOfStockData.data)
+                                    LineChart(
+                                        data = dataPoints.toImmutableList(),
+                                        showDashedLine = true,
+                                        showYLabels = true
+                                    )
+                                }
+                            }
                         }
                     }
                     item{
-                        var selectedIndex by remember { mutableStateOf(0) }
+
                         SegmentedButtons() {
                             SegmentedButtonItem(
                                 selected = selectedIndex == 0,
-                                onClick = { selectedIndex = 0 },
+                                onClick = {
+                                    selectedIndex = 0
+                                    function = "TIME_SERIES_INTRADAY"
+                                    interval = "5min"
+                                          },
                                 label = { Text(text = "intraday")},
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 1,
-                                onClick = { selectedIndex = 1 },
+                                onClick = { selectedIndex = 1
+                                    function = "TIME_SERIES_DAILY"
+                                    interval =null
+                                          },
                                 label = { Text(text = "daywise") },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 2,
-                                onClick = { selectedIndex = 2 },
+                                onClick = { selectedIndex = 2
+                                    function = "TIME_SERIES_WEEKLY"
+                                    interval =null
+                                          },
                                 label = {  Text(text = "weekly") },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 3,
-                                onClick = { selectedIndex = 3 },
+                                onClick = { selectedIndex = 3
+                                    function = "TIME_SERIES_MONTHLY"
+                                    interval =null
+                                          },
                                 label = {  Text(text = "monthly") },
                             )
                         }
@@ -238,126 +265,7 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
                 name = "EPS",
                 value = companyOverview.EPS.toString()
             )
-            SectionInfoItem(
-                name = "Revenue Per Share TTM",
-                value = companyOverview.RevenuePerShareTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Profit Margin",
-                value = companyOverview.ProfitMargin.toString()
-            )
-            SectionInfoItem(
-                name = "Operating Margin TTM",
-                value = companyOverview.OperatingMarginTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Return On Assets TTM",
-                value = companyOverview.ReturnOnAssetsTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Return On Equity TTM",
-                value = companyOverview.ReturnOnEquityTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Revenue TTM",
-                value = companyOverview.RevenueTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Gross Profit TTM",
-                value = companyOverview.GrossProfitTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Diluted EPS TTM",
-                value = companyOverview.DilutedEPSTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Quarterly Earnings Growth YOY",
-                value = companyOverview.QuarterlyEarningsGrowthYOY.toString()
-            )
-            SectionInfoItem(
-                name = "Quarterly Revenue Growth YOY",
-                value = companyOverview.QuarterlyRevenueGrowthYOY.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Target Price",
-                value = companyOverview.AnalystTargetPrice.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Rating Strong Buy",
-                value = companyOverview.AnalystRatingStrongBuy.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Rating Buy",
-                value = companyOverview.AnalystRatingBuy.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Rating Hold",
-                value = companyOverview.AnalystRatingHold.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Rating Sell",
-                value = companyOverview.AnalystRatingSell.toString()
-            )
-            SectionInfoItem(
-                name = "Analyst Rating Strong Sell",
-                value = companyOverview.AnalystRatingStrongSell.toString()
-            )
-            SectionInfoItem(
-                name = "Trailing PE",
-                value = companyOverview.TrailingPE.toString()
-            )
-            SectionInfoItem(
-                name = "Forward PE",
-                value = companyOverview.ForwardPE.toString()
-            )
-            SectionInfoItem(
-                name = "Price To Sales Ratio TTM",
-                value = companyOverview.PriceToSalesRatioTTM.toString()
-            )
-            SectionInfoItem(
-                name = "Price To Book Ratio",
-                value = companyOverview.PriceToBookRatio.toString()
-            )
-            SectionInfoItem(
-                name = "EV To Revenue",
-                value = companyOverview.EVToRevenue.toString()
-            )
-            SectionInfoItem(
-                name = "EV To EBITDA",
-                value = companyOverview.EVToEBITDA.toString()
-            )
-            SectionInfoItem(
-                name = "Beta",
-                value = companyOverview.Beta.toString()
-            )
-            SectionInfoItem(
-                name = "52 Week High",
-                value = companyOverview.weekHigh52.toString()
-            )
-            SectionInfoItem(
-                name = "52 Week Low",
-                value = companyOverview.weekLow52.toString()
-            )
-            SectionInfoItem(
-                name = "50 Day Moving Average",
-                value = companyOverview.movingAverage200Day.toString()
-            )
-            SectionInfoItem(
-                name = "200 Day Moving Average",
-                value = companyOverview.movingAverage50Day.toString()
-            )
-            SectionInfoItem(
-                name = "Shares Outstanding",
-                value = companyOverview.SharesOutstanding.toString()
-            )
-            SectionInfoItem(
-                name = "Dividend Date",
-                value = companyOverview.DividendDate
-            )
-            SectionInfoItem(
-                name = "Ex Dividend Date",
-                value = companyOverview.ExDividendDate
-            )
+
         }
     }
 }

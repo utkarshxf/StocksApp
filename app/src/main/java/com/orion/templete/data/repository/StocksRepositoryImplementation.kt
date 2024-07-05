@@ -20,8 +20,8 @@ class StocksRepositoryImplementation @Inject constructor(private val apiService:
         return response
     }
 
-    override suspend fun getStockData(): StockDataDTO {
-        val response = safeApiRequest { apiService.getStockData() }
+    override suspend fun getStockData(function: String, symbol: String , interval:String?): StockDataDTO {
+        val response = safeApiRequest { apiService.getStockData(function=function,symbol =symbol , interval =interval) }
         return response
     }
 }

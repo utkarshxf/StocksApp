@@ -16,9 +16,6 @@ import javax.inject.Inject
 class ProductScreenViewModel @Inject constructor(private val companyOverviewUseCase: CompanyOverviewUseCase , private val stockDataUseCase: StockDataUseCase) : ViewModel() {
     val stateOfCompanyOverview = mutableStateOf(ProductScreenState())
     val stateOfStockData = mutableStateOf(StockDataScreenState())
-    init {
-        getStockData()
-    }
      fun getCompanyOverview(title: String) {
          companyOverviewUseCase(title).onEach {
             when(it){
@@ -34,8 +31,8 @@ class ProductScreenViewModel @Inject constructor(private val companyOverviewUseC
             }
         }.launchIn(viewModelScope)
     }
-    fun getStockData() {
-        stockDataUseCase().onEach {
+    fun getStockData(function: String , symbol: String ,interval:String? ) {
+        stockDataUseCase(function,symbol,interval).onEach {
             when(it){
                 is StateHandle.Loading -> {
                     stateOfStockData.value = StockDataScreenState(isLoading = true)
