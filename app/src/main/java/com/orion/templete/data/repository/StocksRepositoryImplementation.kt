@@ -11,17 +11,17 @@ import javax.inject.Inject
 class StocksRepositoryImplementation @Inject constructor(private val apiService: ApiService) :
     StocksRepository,SafeApiRequest() {
     override suspend fun getTopGainerLoser(): TopGainLoseDTO {
-        val response = safeApiRequest { apiService.getCompanyInfo() }
+        val response = safeApiRequest { (apiService.getCompanyInfo()) }
         return response
     }
 
     override suspend fun companyOverview(title: String): CompanyOverviewDTO {
-        val response = safeApiRequest { apiService.getCompanyOverview("IBM") }
+        val response = safeApiRequest { (apiService.getCompanyOverview("IBM"))}
         return response
     }
 
     override suspend fun getStockData(function: String, symbol: String , interval:String?): StockDataDTO {
-        val response = safeApiRequest { apiService.getStockData(function=function,symbol =symbol , interval =interval) }
+        val response = safeApiRequest { (apiService.getStockData(function=function,symbol =symbol , interval =interval)) }
         return response
     }
 }

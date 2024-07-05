@@ -25,8 +25,8 @@ interface ApiService {
     @GET("query")
     suspend fun getStockData(
         @Query("function") function: String,
-        @Query("symbol") symbol: String ,
-        @Query("interval") interval: String? ,
+        @Query("symbol") symbol: String,
+        @Query("interval") interval: String? = null,
         @Query("apikey") apiKey: String = "demo"
     ):retrofit2.Response<StockDataDTO>
 

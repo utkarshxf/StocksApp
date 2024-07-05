@@ -1,5 +1,6 @@
 package com.orion.templete.ui.product
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.Image
@@ -8,7 +9,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,9 +26,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,13 +63,13 @@ fun ProductScreen(
     viewModel: ProductScreenViewModel = hiltViewModel()
 ) {
     var selectedIndex by remember { mutableStateOf(0) }
-    var function  by remember { mutableStateOf("TIME_SERIES_INTRADAY") }
-    var interval  by remember { mutableStateOf<String?>("5min")}
+    var function by remember { mutableStateOf("TIME_SERIES_INTRADAY") }
+    var interval by remember { mutableStateOf<String?>("5min") }
     LaunchedEffect(key1 = title) {
         viewModel.getCompanyOverview(title)
     }
     LaunchedEffect(key1 = selectedIndex) {
-        viewModel.getStockData(function,"IBM",interval)
+        viewModel.getStockData(function, "IBM", interval)
     }
     val stateOfCompanyOverview = viewModel.stateOfCompanyOverview.value
     val stateOfStockData = viewModel.stateOfStockData.value
@@ -100,9 +97,11 @@ fun ProductScreen(
                 )
             }, content = {
 
-                LazyColumn(modifier = Modifier
-                    .padding(it)
-                    .padding(15.dp)) {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(it)
+                        .padding(15.dp)
+                ) {
                     item {
                         CompanyDetails(stateOfCompanyOverview.data)
                     }
@@ -111,9 +110,10 @@ fun ProductScreen(
                             visible = stateOfStockData.data != null,
                             exit = ExitTransition.None
                         ) {
-                            when{
-                                stateOfStockData.data!=null -> {
+                            when {
+                                stateOfStockData.data != null -> {
                                     val dataPoints = prepareDataPoints(stateOfStockData.data)
+                                    Log.v("qwerty", stateOfStockData.data.toString())
                                     LineChart(
                                         data = dataPoints.toImmutableList(),
                                         showDashedLine = true,
@@ -123,41 +123,44 @@ fun ProductScreen(
                             }
                         }
                     }
-                    item{
+                    item {
 
-                        SegmentedButtons() {
+                        SegmentedButtons {
                             SegmentedButtonItem(
                                 selected = selectedIndex == 0,
                                 onClick = {
                                     selectedIndex = 0
                                     function = "TIME_SERIES_INTRADAY"
                                     interval = "5min"
-                                          },
-                                label = { Text(text = "intraday")},
+                                },
+                                label = { Text(text = "intraday") },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 1,
-                                onClick = { selectedIndex = 1
+                                onClick = {
+                                    selectedIndex = 1
                                     function = "TIME_SERIES_DAILY"
-                                    interval =null
-                                          },
+                                    interval = null
+                                },
                                 label = { Text(text = "daywise") },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 2,
-                                onClick = { selectedIndex = 2
+                                onClick = {
+                                    selectedIndex = 2
                                     function = "TIME_SERIES_WEEKLY"
-                                    interval =null
-                                          },
-                                label = {  Text(text = "weekly") },
+                                    interval = null
+                                },
+                                label = { Text(text = "weekly") },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 3,
-                                onClick = { selectedIndex = 3
+                                onClick = {
+                                    selectedIndex = 3
                                     function = "TIME_SERIES_MONTHLY"
-                                    interval =null
-                                          },
-                                label = {  Text(text = "monthly") },
+                                    interval = null
+                                },
+                                label = { Text(text = "monthly") },
                             )
                         }
                     }
@@ -399,7 +402,9 @@ fun SectionInfoItem(
 }
 
 fun prepareDataPoints(stockData: StockDataDTO): List<DataPoint> {
-    val timeSeries = stockData.timeSeriesDaily ?: stockData.timeSeries5Min ?: return emptyList()
+    val timeSeries =
+        stockData.timeSeriesDaily ?: stockData.timeSeries5Min ?: stockData.timeSeriesMonthly
+        ?: stockData.timeSeriesWeekly ?: return emptyList()
     return timeSeries.map { (time, entry) ->
         DataPoint(
             y = entry.close.toDouble(),
