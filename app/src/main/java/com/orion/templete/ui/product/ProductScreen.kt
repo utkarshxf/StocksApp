@@ -69,7 +69,7 @@ fun ProductScreen(
         viewModel.getCompanyOverview(title)
     }
     LaunchedEffect(key1 = selectedIndex) {
-        viewModel.getStockData(function, "IBM", interval)
+        viewModel.getStockData(function, title, interval)
     }
     val stateOfCompanyOverview = viewModel.stateOfCompanyOverview.value
     val stateOfStockData = viewModel.stateOfStockData.value
