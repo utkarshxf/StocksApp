@@ -1,5 +1,7 @@
 package com.orion.templete.data.repository
 
+import android.util.Log
+import com.orion.templete.data.model.BestMatchesResponse
 import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.data.model.StockDataDTO
 import com.orion.templete.data.model.TopGainLoseDTO
@@ -22,6 +24,11 @@ class StocksRepositoryImplementation @Inject constructor(private val apiService:
 
     override suspend fun getStockData(function: String, symbol: String , interval:String?): StockDataDTO {
         val response = safeApiRequest { (apiService.getStockData(function=function,symbol =symbol , interval =interval)) }
+        return response
+    }
+
+    override suspend fun tickerSearch(ticker: String): BestMatchesResponse {
+        val response = safeApiRequest { (apiService.tickerSearch(ticker))}
         return response
     }
 }

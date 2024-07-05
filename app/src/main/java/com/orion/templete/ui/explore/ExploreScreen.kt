@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.orion.templete.ui.components.MySearchBar
 import com.orion.templete.ui.components.StockCard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,26 +60,33 @@ fun ExploreScreen(
                 }
             }
             state.data != null -> {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2), modifier = Modifier.padding(it),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    content = {
-                        val data = if (TopLosers) state.data.top_losers else state.data.top_gainers
-                        items(data)
-                        {
-                            Box(modifier = Modifier.clickable {
-                                navigateToProductScreen(it.ticker)
-                            })
+                Column(modifier = Modifier.padding(it)) {
+                    MySearchBar(navigateToProductScreen = navigateToProductScreen)
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2), modifier = Modifier,
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        content = {
+                            val data =
+                                if (TopLosers) state.data.top_losers else state.data.top_gainers
+                            items(data)
                             {
-                                StockCard(it)
-                            }
+                                Box(modifier = Modifier.clickable {
+                                    navigateToProductScreen(it.ticker)
+                                })
+                                {
+                                    StockCard(it)
+                                }
 
-                        }
-                    },
+                            }
+                        },
+                    )
+                }
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.BottomCenter
                 )
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter)
                 {
                     Row(
                         verticalAlignment = Alignment.Bottom,
@@ -99,7 +108,6 @@ fun ExploreScreen(
                         }
                     }
                 }
-
             }
         }
     })
