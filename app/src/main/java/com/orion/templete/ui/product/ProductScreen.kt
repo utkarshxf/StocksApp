@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,6 +28,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -46,6 +52,8 @@ import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.data.model.StockDataDTO
 import com.orion.templete.domain.use_case.DataPoint
 import com.orion.templete.ui.components.LineChart
+import ferg.segmented.buttons.SegmentedButtonItem
+import ferg.segmented.buttons.SegmentedButtons
 import kotlinx.collections.immutable.toImmutableList
 
 
@@ -84,7 +92,7 @@ fun ProductScreen(
                     )
                 )
             }, content = {
-                LazyColumn(modifier = Modifier.padding(it)) {
+                LazyColumn(modifier = Modifier.padding(it).padding(15.dp)) {
                     item {
                         CompanyDetails(stateOfCompanyOverview.data)
                     }
@@ -98,6 +106,31 @@ fun ProductScreen(
                                 data = dataPoints.toImmutableList(),
                                 showDashedLine = true,
                                 showYLabels = true
+                            )
+                        }
+                    }
+                    item{
+                        var selectedIndex by remember { mutableStateOf(0) }
+                        SegmentedButtons() {
+                            SegmentedButtonItem(
+                                selected = selectedIndex == 0,
+                                onClick = { selectedIndex = 0 },
+                                label = { Text(text = "intraday")},
+                            )
+                            SegmentedButtonItem(
+                                selected = selectedIndex == 1,
+                                onClick = { selectedIndex = 1 },
+                                label = { Text(text = "daywise") },
+                            )
+                            SegmentedButtonItem(
+                                selected = selectedIndex == 2,
+                                onClick = { selectedIndex = 2 },
+                                label = {  Text(text = "weekly") },
+                            )
+                            SegmentedButtonItem(
+                                selected = selectedIndex == 3,
+                                onClick = { selectedIndex = 3 },
+                                label = {  Text(text = "monthly") },
                             )
                         }
                     }
@@ -116,8 +149,7 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
     val defaultHorizontalPadding = 16.dp
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
     )
@@ -128,8 +160,6 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
             title = "Company Overview",
             modifier = Modifier.padding(defaultHorizontalPadding)
         )
-
-
         Column(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
@@ -339,7 +369,6 @@ fun CompanyDetails(companyOverview: CompanyOverviewDTO) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .padding(15.dp)
             .fillMaxWidth()
     ) {
         Row(verticalAlignment = Alignment.CenterVertically)
