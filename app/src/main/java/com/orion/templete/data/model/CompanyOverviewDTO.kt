@@ -63,5 +63,7 @@ data class CompanyOverviewDTO(
     val RevenueTTM: String,
     val Sector: String,
     val SharesOutstanding: String,
-    val TrailingPE: String
+    val TrailingPE: String,
+    val createdDate: Long,
+    var lastUpdatedDate: Long
 )

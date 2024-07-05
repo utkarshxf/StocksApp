@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("query?function=TOP_GAINERS_LOSERS")
     suspend fun getCompanyInfo(
-        @Query("apikey") apiKey: String = API_KEY
+        @Query("apikey") apiKey: String = "demo"
     ):retrofit2.Response<TopGainLoseDTO>
 
     @GET("query?function=OVERVIEW")
@@ -33,7 +33,9 @@ interface ApiService {
 
 
     companion object {
-        const val API_KEY = "6EZQZAAGWP4A0JJH"
+        const val API_KEY = "4DSA5UJD8HL9NWH0"
+//        6EZQZAAGWP4A0JJH
+//        4DSA5UJD8HL9NWH0
         const val BASE_URL = "https://alphavantage.co"
     }
 }

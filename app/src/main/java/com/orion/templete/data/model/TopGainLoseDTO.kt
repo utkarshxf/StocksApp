@@ -11,5 +11,7 @@ data class TopGainLoseDTO(
     val objectId:Int,
     val metadata: String,
     val top_gainers: List<Gainer>,
-    val top_losers: List<Gainer>
+    val top_losers: List<Gainer>,
+    val createdDate: Long,
+    var lastUpdatedDate: Long
 )
