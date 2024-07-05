@@ -3,8 +3,9 @@ package com.orion.templete.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.orion.templete.data.db.companyOverviewDao
-import com.orion.templete.data.db.companyOverviewDatabase
+import com.orion.templete.data.db.CompanyOverviewDao
+import com.orion.templete.data.db.CompanyOverviewDatabase
+
 import com.orion.templete.data.db.topGainLoseDao
 import com.orion.templete.data.db.topGainLoseDatabase
 import com.orion.templete.data.repository.StocksRepositoryImplementation
@@ -49,11 +50,11 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun preovideCompanyOverviewDatabase(app: Application): companyOverviewDatabase {
+    fun preovideCompanyOverviewDatabase(app: Application): CompanyOverviewDatabase {
         return Room.databaseBuilder(
             app,
-            companyOverviewDatabase::class.java,
-            companyOverviewDatabase.DATABASE_NAME
+            CompanyOverviewDatabase::class.java,
+            CompanyOverviewDatabase.DATABASE_NAME
         ).build()
     }
 
@@ -64,7 +65,7 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideCompanyOverViewDao(database: companyOverviewDatabase): companyOverviewDao {
+    fun provideCompanyOverViewDao(database: CompanyOverviewDatabase): CompanyOverviewDao {
         return database.companyOverviewDao()
     }
 

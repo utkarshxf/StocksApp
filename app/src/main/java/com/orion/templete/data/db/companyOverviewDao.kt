@@ -8,10 +8,10 @@ import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.data.model.TopGainLoseDTO
 
 @Dao
-interface companyOverviewDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addCompanyOverview(companyOverviewDTO:CompanyOverviewDTO)
+interface CompanyOverviewDao {
+    @Query("SELECT * FROM company_overview_db WHERE symbol = :symbol LIMIT 1")
+    suspend fun getCompanyOverview(symbol: String): CompanyOverviewDTO?
 
-    @Query("SELECT * FROM company_overview_db WHERE objectId = :id LIMIT 1")
-    suspend fun getCompanyOverview(id: Int = 1): CompanyOverviewDTO?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addCompanyOverview(companyOverview: CompanyOverviewDTO)
 }

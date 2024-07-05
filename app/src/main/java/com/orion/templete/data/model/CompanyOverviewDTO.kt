@@ -7,7 +7,9 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "company_overview_db")
 data class CompanyOverviewDTO(
     @PrimaryKey(autoGenerate = true)
-    val objectId:Int,
+    val objectId: Int = 0,
+    @SerializedName("Symbol")
+    val symbol: String,
     @SerializedName("200DayMovingAverage")
     val movingAverage200Day: String,
     @SerializedName("50DayMovingAverage")
@@ -61,6 +63,5 @@ data class CompanyOverviewDTO(
     val RevenueTTM: String,
     val Sector: String,
     val SharesOutstanding: String,
-    val Symbol: String,
     val TrailingPE: String
 )
