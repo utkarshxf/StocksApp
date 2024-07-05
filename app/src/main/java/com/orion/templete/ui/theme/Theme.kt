@@ -23,12 +23,7 @@ private val DarkColorScheme = darkColorScheme(
     inversePrimary = ColorOnPrimaryDark,
     secondary = ColorSecondaryDark,
     onSecondary = ColorOnSecondaryDark,
-    secondaryContainer = ColorSecondaryVariantDark,
     onSecondaryContainer = ColorOnSecondaryDark,
-    tertiary = ColorTextTertiaryDark,
-    onTertiary = ColorTextTertiaryLight,
-    tertiaryContainer = ColorTextTertiaryDark,
-    onTertiaryContainer = ColorTextTertiaryLight,
     background = ColorBackgroundDark,
     onBackground = ColorOnBackgroundDark,
     surface = ColorSurfaceDark,
@@ -42,8 +37,6 @@ private val DarkColorScheme = darkColorScheme(
     onError = ColorOnErrorDark,
     errorContainer = ColorErrorDark,
     onErrorContainer = ColorOnErrorDark,
-    outline = ColorInputBorderDark,
-    outlineVariant = ColorInputBorderLight,
     scrim = ColorSurfaceDark
 )
 
@@ -55,12 +48,8 @@ private val LightColorScheme = lightColorScheme(
     inversePrimary = ColorOnPrimaryDark,
     secondary = ColorSecondaryLight,
     onSecondary = ColorOnSecondaryLight,
-    secondaryContainer = ColorSecondaryVariantLight,
+
     onSecondaryContainer = ColorOnSecondaryDark,
-    tertiary = ColorTextTertiaryLight,
-    onTertiary = ColorTextTertiaryDark,
-    tertiaryContainer = ColorTextTertiaryLight,
-    onTertiaryContainer = ColorTextTertiaryDark,
     background = ColorBackgroundLight,
     onBackground = ColorOnBackgroundLight,
     surface = ColorSurfaceLight,
@@ -74,8 +63,6 @@ private val LightColorScheme = lightColorScheme(
     onError = ColorOnErrorLight,
     errorContainer = ColorErrorLight,
     onErrorContainer = ColorOnErrorLight,
-    outline = ColorInputBorderLight,
-    outlineVariant = ColorInputBorderDark,
     scrim = ColorSurfaceLight
 )
 

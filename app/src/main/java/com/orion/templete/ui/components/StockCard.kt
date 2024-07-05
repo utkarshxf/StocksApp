@@ -81,7 +81,6 @@ private fun TickerName(name: String = "Apple Inc.", tickerName: String = "AAPL")
             text = name,
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2
         )
@@ -95,15 +94,15 @@ fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = currentValue.toString(),
+            text = "$${currentValue.toString()}",
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+
         )
         Text(
-            text = "$${total.toInt()}",
+            text = total.toString(),
             style = MaterialTheme.typography.labelSmall,
-            color = Color.Gray
+
         )
     }
 }

@@ -87,7 +87,7 @@ private fun TickerName(name: String, symbol: String) {
             text = name,
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
+
             overflow = TextOverflow.Ellipsis,
             maxLines = 2
         )
@@ -105,7 +105,7 @@ fun ValueView(region: String, currency: String, marketOpen: String, marketClose:
             text = "Region: $region",
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+
         )
         Text(
             text = "Currency: $currency",

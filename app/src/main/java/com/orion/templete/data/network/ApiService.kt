@@ -12,13 +12,13 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("query?function=TOP_GAINERS_LOSERS")
     suspend fun getCompanyInfo(
-        @Query("apikey") apiKey: String = "demo"
+        @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<TopGainLoseDTO>
 
     @GET("query?function=OVERVIEW")
     suspend fun getCompanyOverview(
         @Query("symbol") ticker: String = "DECAW",
-        @Query("apikey") apiKey: String = "demo"
+        @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<CompanyOverviewDTO>
 
 
@@ -28,22 +28,19 @@ interface ApiService {
         @Query("function") function: String,
         @Query("symbol") symbol: String,
         @Query("interval") interval: String? = null,
-        @Query("apikey") apiKey: String = "demo"
+        @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<StockDataDTO>
 
     //    https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo
     @GET("query?function=SYMBOL_SEARCH")
     suspend fun tickerSearch(
         @Query("keywords") keywords: String = "tesco",
-        @Query("apikey") apiKey: String = "demo"
+        @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<BestMatchesResponse>
 
 
     companion object {
-        const val API_KEY = "6EZQZAAGWP4A0JJH"
-
-        //        6EZQZAAGWP4A0JJH
-//        4DSA5UJD8HL9NWH0
+        const val API_KEY = "4DSA5UJD8HL9NWH0"
         const val BASE_URL = "https://alphavantage.co"
     }
 }

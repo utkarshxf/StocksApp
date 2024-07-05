@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.domain.use_case.TickerSearchUseCase
 import com.orion.templete.domain.use_case.TopGainerLoserUseCase
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -58,4 +60,5 @@ class ExploreScreenViewModel @Inject constructor(private val topGainerLoserUseCa
             }
         }.launchIn(viewModelScope)
     }
+
 }
