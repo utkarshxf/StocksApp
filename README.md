@@ -5,10 +5,14 @@
 <p align="center">
 <img src="previews/screenshot.png"/>
 </p>
+
 ## Download
+
 Go to the [Releases](https:??) to download the latest APK.
 <img src="previews/preview.gif" align="right" width="320"/>
+
 ## Tech stack & Open-source libraries
+
 - [Kotlin](https://kotlinlang.org/) based, utilizing [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous operations.
 - Jetpack Libraries:
   - Jetpack Compose: Android’s modern toolkit for declarative UI development.
