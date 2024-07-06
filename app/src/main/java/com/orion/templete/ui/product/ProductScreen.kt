@@ -36,6 +36,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.platform.LocalContext
+
+
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -43,6 +47,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.orion.templete.R
 import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.data.model.StockDataDTO
 import com.orion.templete.domain.use_case.DataPoint
@@ -69,7 +74,7 @@ fun ProductScreen(
     LaunchedEffect(key1 = selectedIndex) {
         viewModel.getStockData(function, title, interval)
     }
-
+    val context = LocalContext.current
     val stateOfCompanyOverview = viewModel.stateOfCompanyOverview.value
     val stateOfStockData = viewModel.stateOfStockData.value
 
@@ -89,7 +94,7 @@ fun ProductScreen(
         stateOfCompanyOverview.data != null -> {
             Scaffold(topBar = {
                 TopAppBar(
-                    title = { Text(text = "PRODUCT SCREEN") }, modifier = Modifier.border(
+                    title = { Text(text = stringResource(R.string.product_screen)) }, modifier = Modifier.border(
                         color = MaterialTheme.colorScheme.primary, width = 1.dp
                     )
                 )
@@ -128,13 +133,14 @@ fun ProductScreen(
                         }
                     }
                     item {
+
                         SegmentedButtons {
                             SegmentedButtonItem(
                                 selected = selectedIndex == 0,
                                 onClick = {
                                     selectedIndex = 0
-                                    function = "TIME_SERIES_INTRADAY"
-                                    interval = "5min"
+                                    function = context.getString(R.string.time_series_intraday)
+                                    interval = context.getString(R.string._5min)
                                 },
                                 label = { Text(text = "intraday") },
                             )
@@ -142,28 +148,28 @@ fun ProductScreen(
                                 selected = selectedIndex == 1,
                                 onClick = {
                                     selectedIndex = 1
-                                    function = "TIME_SERIES_DAILY"
+                                    function = context.getString(R.string.time_series_daily)
                                     interval = null
                                 },
-                                label = { Text(text = "daywise") },
+                                label = { Text(text = stringResource(R.string.daywise)) },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 2,
                                 onClick = {
                                     selectedIndex = 2
-                                    function = "TIME_SERIES_WEEKLY"
+                                    function = context.getString(R.string.time_series_weekly)
                                     interval = null
                                 },
-                                label = { Text(text = "weekly") },
+                                label = { Text(text = stringResource(R.string.weekly)) },
                             )
                             SegmentedButtonItem(
                                 selected = selectedIndex == 3,
                                 onClick = {
                                     selectedIndex = 3
-                                    function = "TIME_SERIES_MONTHLY"
+                                    function = context.getString(R.string.time_series_monthly)
                                     interval = null
                                 },
-                                label = { Text(text = "monthly") },
+                                label = { Text(text = stringResource(R.string.monthly)) },
                             )
                         }
                     }
@@ -225,55 +231,52 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
             }
             DisplayBar(
                 companyOverview.weekLow52,
-                "Avarage 50 days: " + companyOverview.movingAverage50Day,
+                stringResource(R.string.avarage_50_days) + companyOverview.movingAverage50Day,
                 companyOverview.weekHigh52
             )
             Spacer(modifier = Modifier.size(16.dp))
             SectionInfoItem(
-                name = "MarketCap",
+                name = stringResource(R.string.marketcap),
                 value = companyOverview.MarketCapitalization,
             )
             SectionInfoItem(
-                name = "PERatio", value = companyOverview.PERatio
+                name = stringResource(R.string.peratio), value = companyOverview.PERatio
             )
             SectionInfoItem(
-                name = "Beta", value = companyOverview.Beta
+                name = stringResource(R.string.beta), value = companyOverview.Beta
             )
             SectionInfoItem(
-                name = "Dividend Yield", value = companyOverview.DividendYield
+                name = stringResource(R.string.dividend_yield), value = companyOverview.DividendYield
             )
             SectionInfoItem(
-                name = "Profit Margin", value = companyOverview.ProfitMargin
+                name = stringResource(R.string.profit_margin), value = companyOverview.ProfitMargin
             )
             SectionInfoItem(
-                name = "Industry", value = companyOverview.Industry
+                name = stringResource(R.string.industry), value = companyOverview.Industry
             )
             SectionInfoItem(
-                name = "Address", value = companyOverview.Address
+                name = stringResource(R.string.address), value = companyOverview.Address
             )
             SectionInfoItem(
-                name = "Fiscal Year End", value = companyOverview.FiscalYearEnd
+                name = stringResource(R.string.fiscal_year_end), value = companyOverview.FiscalYearEnd
             )
             SectionInfoItem(
-                name = "Latest Quarter", value = companyOverview.LatestQuarter
+                name = stringResource(R.string.latest_quarter), value = companyOverview.LatestQuarter
             )
             SectionInfoItem(
-                name = "EBITDA", value = companyOverview.EBITDA.toString()
+                name = stringResource(R.string.ebitda), value = companyOverview.EBITDA.toString()
             )
             SectionInfoItem(
-                name = "PEG Ratio", value = companyOverview.PEGRatio.toString()
+                name = stringResource(R.string.peg_ratio), value = companyOverview.PEGRatio.toString()
             )
             SectionInfoItem(
-                name = "Book Value", value = companyOverview.BookValue.toString()
+                name = stringResource(R.string.book_value), value = companyOverview.BookValue.toString()
             )
             SectionInfoItem(
-                name = "Dividend Per Share", value = companyOverview.DividendPerShare.toString()
+                name = stringResource(R.string.dividend_per_share), value = companyOverview.DividendPerShare.toString()
             )
             SectionInfoItem(
-                name = "Dividend Yield", value = companyOverview.DividendYield.toString()
-            )
-            SectionInfoItem(
-                name = "EPS", value = companyOverview.EPS.toString()
+                name = stringResource(R.string.eps), value = companyOverview.EPS.toString()
             )
         }
 

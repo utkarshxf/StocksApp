@@ -28,8 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.orion.templete.R
 import com.orion.templete.ui.components.MySearchBar
 import com.orion.templete.ui.components.StockCard
 
@@ -44,7 +46,7 @@ fun ExploreScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text(text = "STOCKS APP") },
+            title = { Text(text = stringResource(R.string.stocks_app)) },
             modifier = Modifier.border(color = MaterialTheme.colorScheme.primary, width = 1.dp)
         )
     }, content = {
@@ -80,32 +82,32 @@ fun ExploreScreen(
                                 }
                             }
                         })
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.BottomCenter
+
+                }
+                Box(
+                    modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.Bottom,
-                            horizontalArrangement = Arrangement.Center
+                        Button(
+                            onClick = { topLosers = false },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(52.dp),
+                            shape = RoundedCornerShape(0.dp)
                         ) {
-                            Button(
-                                onClick = { topLosers = false },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(52.dp),
-                                shape = RoundedCornerShape(0.dp)
-                            ) {
-                                Text(text = "TOP GAINERS")
-                            }
-                            Button(
-                                onClick = { topLosers = true },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(52.dp),
-                                shape = RoundedCornerShape(0.dp)
-                            ) {
-                                Text(text = "TOP LOSERS")
-                            }
+                            Text(text = stringResource(R.string.top_gainers))
+                        }
+                        Button(
+                            onClick = { topLosers = true },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(52.dp),
+                            shape = RoundedCornerShape(0.dp)
+                        ) {
+                            Text(text = stringResource(R.string.top_losers))
                         }
                     }
                 }

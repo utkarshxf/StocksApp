@@ -2,7 +2,8 @@ package com.orion.templete.domain.use_case
 
 import android.content.Context
 import com.orion.newsapp.util.StateHandle
-import com.orion.templete.data.db.topGainLoseDatabase
+import com.orion.templete.R
+import com.orion.templete.data.db.TopGainLoseDatabase
 import com.orion.templete.data.model.TopGainLoseDTO
 import com.orion.templete.domain.repository.StocksRepository
 import com.orion.templete.util.NetworkCheck
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class TopGainerLoserUseCase @Inject constructor(
     private val repository: StocksRepository,
-    private val topGainLoseDatabase: topGainLoseDatabase,
+    private val topGainLoseDatabase: TopGainLoseDatabase,
     private val context: Context
 ) {
     operator fun invoke(): Flow<StateHandle<TopGainLoseDTO>> = flow {
@@ -37,7 +38,7 @@ class TopGainerLoserUseCase @Inject constructor(
             if (topGainerLoser != null && (System.currentTimeMillis() - topGainerLoser.lastUpdatedDate) <= ttl) {
                 emit(StateHandle.Success(topGainerLoser))
             } else {
-                emit(StateHandle.Error("No internet connection and no cached data found."))
+                emit(StateHandle.Error(context.getString(R.string.api_limit_reached_please_try_again_later)))
             }
             emit(StateHandle.Success(topGainerLoser))
         }

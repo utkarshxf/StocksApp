@@ -8,7 +8,7 @@ import androidx.room.Update
 import com.orion.templete.data.model.TopGainLoseDTO
 
 @Dao
-interface topGainLoseDao {
+interface TopGainLoseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTopGainLose(topGainLoseDTO: TopGainLoseDTO)
 
@@ -16,7 +16,7 @@ interface topGainLoseDao {
     suspend fun deleteOldData(expirationTime: Long)
 
     @Update
-    suspend fun updatetopGainLose(topGainLoseDTO: TopGainLoseDTO)
+    suspend fun updateTopGainLose(topGainLoseDTO: TopGainLoseDTO)
 
     @Query("SELECT * FROM top_gain_lose")
     suspend fun getTopGainLose(): TopGainLoseDTO

@@ -2,6 +2,7 @@ package com.orion.templete.domain.use_case
 
 import android.content.Context
 import com.orion.newsapp.util.StateHandle
+import com.orion.templete.R
 import com.orion.templete.data.db.CompanyOverviewDatabase
 import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.domain.repository.StocksRepository
@@ -16,8 +17,8 @@ class CompanyOverviewUseCase @Inject constructor(
     private val context: Context
 ) {
     operator fun invoke(symbol: String): Flow<StateHandle<CompanyOverviewDTO>> = flow {
-        emit(StateHandle.Loading(null))
         val ttl: Long = 24 * 60 * 60 * 1000 // 1 day TTL
+        emit(StateHandle.Loading(null))
         if (NetworkCheck.isInternetAvailable(context)) {
             try {
                 val companyOverview = repository.companyOverview(symbol)
@@ -39,10 +40,10 @@ class CompanyOverviewUseCase @Inject constructor(
                 if (companyOverview != null && (System.currentTimeMillis() - companyOverview.lastUpdatedDate) <= ttl) {
                     emit(StateHandle.Success(companyOverview))
                 } else {
-                    emit(StateHandle.Error("No internet connection and no cached data found."))
+                    emit(StateHandle.Error(context.getString(R.string.no_internet_connection_and_no_cached_data_found)))
                 }
             } catch (e: RuntimeException) {
-                emit(StateHandle.Error("API limit reached. Please try again later."))
+                emit(StateHandle.Error(context.getString(R.string.api_limit_reached_please_try_again_later)))
             } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }

@@ -30,11 +30,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.orion.templete.R
 import ferg.segmented.buttons.SegmentedButtonsDefaults.ITEM_ANIMATION_MILLIS
 import ferg.segmented.buttons.SegmentedButtonsDefaults.minimumHeight
 import ferg.segmented.buttons.SegmentedButtonsDefaults.outlineThickness
@@ -232,7 +234,7 @@ data class SegmentedButtonColors internal constructor(
         return animateColorAsState(
             targetValue = targetValue,
             animationSpec = tween(ITEM_ANIMATION_MILLIS),
-            label = "SegmentedButtonsTextColor"
+            label = stringResource(R.string.segmentedbuttonstextcolor)
         )
     }
 
@@ -245,7 +247,7 @@ data class SegmentedButtonColors internal constructor(
         return animateColorAsState(
             targetValue = targetValue,
             animationSpec = tween(ITEM_ANIMATION_MILLIS),
-            label = "SegmentedButtonsIconColor"
+            label = stringResource(R.string.segmentedbuttonsiconcolor)
         )
     }
 

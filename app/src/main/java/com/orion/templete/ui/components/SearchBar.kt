@@ -52,7 +52,11 @@ fun MySearchBar(
         mutableStateOf(mutableStateListOf<String>())
     }
     val dataState = exploreScreenViewModel.searchedItems.value
-    val categories = listOf("All", "Stocks", "ETFs")
+    val categories = listOf(stringResource(R.string.all), stringResource(R.string.stocks),
+        stringResource(
+            R.string.etfs
+        )
+    )
     var isSelected by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf("All") }
     val itemHistory = remember { mutableStateListOf<String>() }
@@ -77,7 +81,7 @@ fun MySearchBar(
             exploreScreenViewModel.searchStock(text)
             active = it
         },
-        placeholder = { Text(text = "Search") },
+        placeholder = { Text(text = stringResource(R.string.search)) },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -87,7 +91,7 @@ fun MySearchBar(
         trailingIcon = {
             if (active) {
                 Icon(imageVector = Icons.Default.Close,
-                    contentDescription = "Close Icon",
+                    contentDescription = stringResource(R.string.close_icon),
                     modifier = Modifier.clickable {
                         if (text.isNotEmpty()) {
                             text = ""

@@ -5,8 +5,8 @@ import android.content.Context
 import androidx.room.Room
 import com.orion.templete.data.db.CompanyOverviewDao
 import com.orion.templete.data.db.CompanyOverviewDatabase
-import com.orion.templete.data.db.topGainLoseDao
-import com.orion.templete.data.db.topGainLoseDatabase
+import com.orion.templete.data.db.TopGainLoseDao
+import com.orion.templete.data.db.TopGainLoseDatabase
 import com.orion.templete.data.network.ApiService
 import com.orion.templete.data.repository.StocksRepositoryImplementation
 import com.orion.templete.domain.repository.StocksRepository
@@ -38,9 +38,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTopGainLoseDatabase(app: Application): topGainLoseDatabase {
+    fun provideTopGainLoseDatabase(app: Application): TopGainLoseDatabase {
         return Room.databaseBuilder(
-            app, topGainLoseDatabase::class.java, topGainLoseDatabase.DATABASE_NAME
+            app, TopGainLoseDatabase::class.java, TopGainLoseDatabase.DATABASE_NAME
         ).build()
     }
 
@@ -54,7 +54,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTopGainLoseDao(database: topGainLoseDatabase): topGainLoseDao {
+    fun provideTopGainLoseDao(database: TopGainLoseDatabase): TopGainLoseDao {
         return database.topGainLoseDao()
     }
 

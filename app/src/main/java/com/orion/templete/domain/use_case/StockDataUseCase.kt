@@ -2,6 +2,7 @@ package com.orion.templete.domain.use_case
 
 import android.content.Context
 import com.orion.newsapp.util.StateHandle
+import com.orion.templete.R
 import com.orion.templete.data.model.StockDataDTO
 import com.orion.templete.domain.repository.StocksRepository
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +25,7 @@ class StockDataUseCase @Inject constructor(
                 repository.getStockData(function = function, symbol = symbol, interval = interval)
             emit(StateHandle.Success(stockData))
         } catch (e: RuntimeException) {
-            emit(StateHandle.Error("API limit reached. Please try again later."))
+            emit(StateHandle.Error(context.getString(R.string.api_limit_reached_please_try_again_later)))
         } catch (e: Exception) {
             emit(StateHandle.Error(e.message))
         }
