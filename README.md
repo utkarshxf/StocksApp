@@ -10,6 +10,8 @@
 Go to the [Releases](https:??) to download the latest APK.
 <img src="previews/preview.gif" align="right" width="320"/>
 
+- Go to  [Features](#features) Section to know how Stocks App work.
+
 ## Tech stack & Open-source libraries
 
 - [Kotlin](https://kotlinlang.org/) based, utilizing [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous operations.
