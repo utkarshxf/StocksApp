@@ -20,7 +20,12 @@ class TickerSearchUseCase @Inject constructor(
         try {
             val searchedItem = repository.tickerSearch(symbol)
             emit(StateHandle.Success(searchedItem))
-        } catch (e: Exception) {
+        }
+        catch (e:RuntimeException)
+        {
+            emit(StateHandle.Error("API limit reached. Please try again later."))
+        }
+        catch (e: Exception) {
             emit(StateHandle.Error(e.message))
         }
     }

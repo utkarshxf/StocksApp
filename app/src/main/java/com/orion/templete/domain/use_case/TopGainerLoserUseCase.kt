@@ -26,7 +26,11 @@ class TopGainerLoserUseCase @Inject constructor(
                 topGainLoseDatabase.topGainLoseDao().deleteOldData(currentTime - ttl)   //delete expired data
                 topGainLoseDatabase.topGainLoseDao().addTopGainLose(topGainerLoser)
                 emit(StateHandle.Success(topGainerLoser))
-            } catch (e: Exception) {
+            }catch (e:RuntimeException)
+            {
+                emit(StateHandle.Error("API limit reached. Please try again later."))
+            }
+            catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         } else {

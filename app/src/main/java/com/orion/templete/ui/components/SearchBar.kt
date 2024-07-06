@@ -104,7 +104,8 @@ fun MySearchBar(
 
                 FilterChip(selected = selectedCategory == category,
                     onClick = { selectedCategory = category
-                        exploreScreenViewModel.searchStock(text + category)},
+                        text = ""
+                        exploreScreenViewModel.searchStock(category)},
                     label = { Text(category) }, modifier = Modifier.padding(horizontal = 4.dp))
             }
         }

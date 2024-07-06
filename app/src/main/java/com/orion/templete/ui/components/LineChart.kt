@@ -125,7 +125,6 @@ fun LineChart(
         }
         if (showYLabels) {
             val textPaint = Paint().apply {
-                color = Color.Black.toArgb()
                 textAlign = Paint.Align.RIGHT
                 textSize = density.run { 12.dp.toPx() }
                 typeface = setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD))

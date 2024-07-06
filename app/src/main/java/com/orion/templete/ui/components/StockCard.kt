@@ -1,6 +1,7 @@
 package com.orion.templete.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orion.templete.R
@@ -49,7 +51,7 @@ fun StockCard(StockCardData: Gainer, modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            AssetIcon()
+            AssetIcon(StockCardData.ticker)
             Spacer(modifier = Modifier.size(8.dp))
             TickerName(StockCardData.ticker)
             Spacer(modifier = Modifier.size(16.dp))
@@ -59,16 +61,22 @@ fun StockCard(StockCardData: Gainer, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun AssetIcon(iconDrawable: Int = R.drawable.app_icon) {
-    Image(
-        modifier = Modifier
-            .size(64.dp)
-            .padding(8.dp)
-            .clip(RoundedCornerShape(50)),
-        contentScale = ContentScale.Crop,
-        painter = painterResource(iconDrawable),
-        contentDescription = null
-    )
+private fun AssetIcon(word: String? = null) {
+    if (!word.isNullOrEmpty()) {
+        Box(
+            modifier = Modifier
+                .size(52.dp)
+                .clip(RoundedCornerShape(50))
+                .background(MaterialTheme.colorScheme.primary),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = word.first().toString(),
+                style = MaterialTheme.typography.displaySmall,
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
+    }
 }
 
 
@@ -94,7 +102,7 @@ fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = "$${currentValue.toString()}",
+            text = "${currentValue.toString()}%",
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
 
