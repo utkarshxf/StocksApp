@@ -81,6 +81,8 @@ These endpoints used for all the required data:
         -Whenever there is an Insert or an Update operation, the lastUpDatedDate column updated with the current timestamp.
         -The next time a Read operation happens, limit it by the TTL(defined in Android Client).
 
-
+- Dark Mode
+    - switched dynamically(Light / Dark Mode)
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/f34d218f-45fe-476b-8822-1f479136c6e9" width="200"/>
 
 
