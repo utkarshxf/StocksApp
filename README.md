@@ -17,7 +17,7 @@ Go to the [Releases](https:??) to download the latest APK.
 - Jetpack Libraries:
   - Jetpack Compose: Android’s modern toolkit for declarative UI development.
   - ViewModel: Manages UI-related data and is lifecycle-aware, ensuring data survival through configuration changes.
-  - Navigation: Facilitates screen navigation, complemented by [Hilt Navigation Compose](https://developer.android.com/jetpack/compose/libraries#hilt) for dependency injection.
+  - Navigation: Facilitates screen navigation, complemented by [Compose Navigation]([https://developer.android.com/develop/ui/compose/navigation]) for Screen Navigation.
   - Room: Constructs a database with an SQLite abstraction layer for seamless database access.
   - [Hilt](https://dagger.dev/hilt/): Facilitates dependency injection.
 - Architecture:
@@ -54,14 +54,14 @@ These endpoints used for all the required data:
 
 ## Features
 - View Top gainers and losers
-    --Open the app.
-    -- click on TOP GAINERS / LOSERS Button.
+    -Open the app.
+    -click on TOP GAINERS / LOSERS Button.
 - Searching for Stocks:
-    --Open the app.
-   --Use the search bar to find a specific stock by its symbol.
+    -Open the app.
+    -Use the search bar to find a specific stock by its symbol.
 - Viewing Stock Details:
-  --Select a stock from the search results.
-  --View the stock's real-time data and historical charts.
+    -Select a stock from the search results.
+    -View the stock's real-time data and historical charts.
 
 
 
