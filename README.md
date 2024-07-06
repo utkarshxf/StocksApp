@@ -76,7 +76,7 @@ These endpoints used for all the required data:
 - Offline Mode
     - Data Catch in local Database.
       
-      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/57a58922-f947-4949-ab01-a59dee0b2ea5" width="200"/>
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/8261f62d-cf10-43a7-92ec-6d8e7511338f" width="200"/>
 
     - TTL Catched Data
       
