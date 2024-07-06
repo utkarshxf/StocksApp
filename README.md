@@ -54,8 +54,9 @@ These endpoints used for all the required data:
 ## Features
 - View Top gainers and losers
     - Open the app.
-    -> ![Bottom button](https://github.com/utkarshxf/StocksApp/assets/78771861/1da1a225-b8ef-489b-9ed7-78e903528c83)
-click on TOP GAINERS / LOSERS Button.
+    ->click on TOP GAINERS / LOSERS Button.
+     <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/1da1a225-b8ef-489b-9ed7-78e903528c83" width="300"/>
+
       
 - Searching for Stocks:
     - Open the app.
