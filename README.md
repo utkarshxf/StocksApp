@@ -71,5 +71,14 @@ These endpoints used for all the required data:
 
       <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/ee2c2b00-3a9e-45b2-ad10-7beaa6a21c17" width="200"/>
 
+- Offline Mode
+    - Data Catch in local Database.
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/57a58922-f947-4949-ab01-a59dee0b2ea5" width="200"/>
+
+    -lastUpDatedDate
+        Whenever there is an Insert or an Update operation, the lastUpDatedDate column updated with the current timestamp.
+        The next time a Read operation happens, limit it by the TTL(defined in Android Client).
+
+
 
 
