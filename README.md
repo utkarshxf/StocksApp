@@ -83,6 +83,7 @@ These endpoints used for all the required data:
 
 - Dark Mode
     - switched dynamically(Light / Dark Mode)
+ 
       <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/f34d218f-45fe-476b-8822-1f479136c6e9" width="200"/>
 
 
