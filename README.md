@@ -45,14 +45,23 @@ The data layer is composed of repositories that handle business logic tasks such
 
 ## Data API
 
-
-
 STOCKS App using the [Alphavantage](https://www.alphavantage.co) for constructing RESTful API.<br>
 Alphavantage provides a RESTful API interface to highly detailed objects built from thousands of lines of data related to stocks.
-These endpoints can be used for all the required data:
+These endpoints used for all the required data:
 - Alpha Intelligence - Top Gainers and Losers.
 - Fundamental data - Company Overview
 - Core Stocks API - Ticker search
+
+## Features
+- View Top gainers and losers
+    --Open the app.
+    -- click on TOP GAINERS / LOSERS Button.
+- Searching for Stocks:
+    --Open the app.
+   --Use the search bar to find a specific stock by its symbol.
+- Viewing Stock Details:
+  --Select a stock from the search results.
+  --View the stock's real-time data and historical charts.
 
 
 
