@@ -102,16 +102,16 @@ fun MySearchBar(
         Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             categories.forEach { category ->
 
-                FilterChip(selected = selectedCategory == category,
-                    onClick = { selectedCategory = category
-                        text = ""
-                        exploreScreenViewModel.searchStock(category)},
-                    label = { Text(category) }, modifier = Modifier.padding(horizontal = 4.dp))
+                FilterChip(selected = selectedCategory == category, onClick = {
+                    selectedCategory = category
+                    text = ""
+                    exploreScreenViewModel.searchStock(category)
+                }, label = { Text(category) }, modifier = Modifier.padding(horizontal = 4.dp))
             }
         }
         itemHistory.forEach {
             Column {
-                Row{
+                Row {
                     Text(it, modifier = Modifier.padding(vertical = 4.dp))
                     Icon(imageVector = Icons.Default.Close,
                         contentDescription = "Close Icon",

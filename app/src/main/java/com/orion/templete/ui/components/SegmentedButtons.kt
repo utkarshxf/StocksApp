@@ -96,25 +96,22 @@ fun SegmentedButtons(
                     colors.SegmentedDivider()
                 }
             }
-            val dividerPlaceables =
-                subcompose(ButtonSlots.Divider, dividers).map {
-                    it.measure(
-                        constraints.copy(
-                            minWidth = outlineThicknessPx,
-                            maxWidth = outlineThicknessPx,
-                            minHeight = buttonRowHeight - outlineThicknessPx * 2,
-                            maxHeight = buttonRowHeight - outlineThicknessPx * 2,
-                        )
+            val dividerPlaceables = subcompose(ButtonSlots.Divider, dividers).map {
+                it.measure(
+                    constraints.copy(
+                        minWidth = outlineThicknessPx,
+                        maxWidth = outlineThicknessPx,
+                        minHeight = buttonRowHeight - outlineThicknessPx * 2,
+                        maxHeight = buttonRowHeight - outlineThicknessPx * 2,
                     )
-                }
+                )
+            }
 
             layout(bottonRowWidth, buttonRowHeight) {
                 buttonPlaceables.forEachIndexed { index, button ->
                     if (index < dividerPlaceables.size) {
                         dividerPlaceables[index].placeRelative(
-                            index * buttonWidth + buttonWidth,
-                            outlineThicknessPx,
-                            1f
+                            index * buttonWidth + buttonWidth, outlineThicknessPx, 1f
                         )
                     }
                     button.placeRelative(index * buttonWidth, 0, 0f)
@@ -145,30 +142,29 @@ fun SegmentedButtonItem(
     colors: SegmentedButtonColors = SegmentedButtonsDefaults.colors(),
     textStyle: TextStyle = MaterialTheme.typography.labelLarge
 ) {
-    val styledLabel: @Composable (() -> Unit)? =
-        label?.let {
-            @Composable {
-                val textColor by colors.textColor(selected = selected)
-                CompositionLocalProvider(LocalContentColor provides textColor) {
-                    ProvideTextStyle(textStyle, content = label)
-                }
+    val styledLabel: @Composable (() -> Unit)? = label?.let {
+        @Composable {
+            val textColor by colors.textColor(selected = selected)
+            CompositionLocalProvider(LocalContentColor provides textColor) {
+                ProvideTextStyle(textStyle, content = label)
             }
         }
+    }
 
-    val styledIcon: @Composable (() -> Unit)? =
-        icon?.let {
-            @Composable {
-                val iconColor by colors.iconColor(selected = selected)
-                val clearSemantics = label != null && selected
-                Box(modifier = if (clearSemantics) Modifier.clearAndSetSemantics {} else Modifier) {
-                    CompositionLocalProvider(LocalContentColor provides iconColor, content = icon)
-                }
+    val styledIcon: @Composable (() -> Unit)? = icon?.let {
+        @Composable {
+            val iconColor by colors.iconColor(selected = selected)
+            val clearSemantics = label != null && selected
+            Box(modifier = if (clearSemantics) Modifier.clearAndSetSemantics {} else Modifier) {
+                CompositionLocalProvider(LocalContentColor provides iconColor, content = icon)
             }
         }
+    }
 
     val animationProgress: Float by animateFloatAsState(
         targetValue = if (selected) colors.indicatorColor.alpha else 0f,
-        animationSpec = tween(ITEM_ANIMATION_MILLIS), label = "SegmentedButton"
+        animationSpec = tween(ITEM_ANIMATION_MILLIS),
+        label = "SegmentedButton"
     )
 
     Box(
@@ -182,8 +178,7 @@ fun SegmentedButtonItem(
             .background(
                 color = colors.indicatorColor.copy(alpha = animationProgress),
             )
-            .padding(12.dp),
-        contentAlignment = Alignment.Center
+            .padding(12.dp), contentAlignment = Alignment.Center
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -256,9 +251,7 @@ data class SegmentedButtonColors internal constructor(
 
     @Composable
     fun SegmentedDivider(
-        modifier: Modifier = Modifier,
-        thickness: Dp = outlineThickness,
-        color: Color = outlineColor
+        modifier: Modifier = Modifier, thickness: Dp = outlineThickness, color: Color = outlineColor
     ) {
         Box(
             modifier
@@ -270,6 +263,5 @@ data class SegmentedButtonColors internal constructor(
 }
 
 private enum class ButtonSlots {
-    Buttons,
-    Divider,
+    Buttons, Divider,
 }

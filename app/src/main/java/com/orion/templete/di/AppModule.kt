@@ -5,12 +5,11 @@ import android.content.Context
 import androidx.room.Room
 import com.orion.templete.data.db.CompanyOverviewDao
 import com.orion.templete.data.db.CompanyOverviewDatabase
-
 import com.orion.templete.data.db.topGainLoseDao
 import com.orion.templete.data.db.topGainLoseDatabase
+import com.orion.templete.data.network.ApiService
 import com.orion.templete.data.repository.StocksRepositoryImplementation
 import com.orion.templete.domain.repository.StocksRepository
-import com.orion.templete.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,10 +26,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideStockApi(): ApiService {
-        return Retrofit.Builder()
-            .baseUrl(ApiService.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return Retrofit.Builder().baseUrl(ApiService.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()).build()
             .create(ApiService::class.java)
     }
 
@@ -43,18 +40,15 @@ object AppModule {
     @Singleton
     fun provideTopGainLoseDatabase(app: Application): topGainLoseDatabase {
         return Room.databaseBuilder(
-            app,
-            topGainLoseDatabase::class.java,
-            topGainLoseDatabase.DATABASE_NAME
+            app, topGainLoseDatabase::class.java, topGainLoseDatabase.DATABASE_NAME
         ).build()
     }
+
     @Provides
     @Singleton
     fun preovideCompanyOverviewDatabase(app: Application): CompanyOverviewDatabase {
         return Room.databaseBuilder(
-            app,
-            CompanyOverviewDatabase::class.java,
-            CompanyOverviewDatabase.DATABASE_NAME
+            app, CompanyOverviewDatabase::class.java, CompanyOverviewDatabase.DATABASE_NAME
         ).build()
     }
 
@@ -63,6 +57,7 @@ object AppModule {
     fun provideTopGainLoseDao(database: topGainLoseDatabase): topGainLoseDao {
         return database.topGainLoseDao()
     }
+
     @Provides
     @Singleton
     fun provideCompanyOverViewDao(database: CompanyOverviewDatabase): CompanyOverviewDao {

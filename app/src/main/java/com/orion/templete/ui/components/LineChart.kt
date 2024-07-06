@@ -39,15 +39,16 @@ fun LineChart(
     }
 
     val (lowerValue, upperValue) = remember(key1 = data) {
-        Pair(
-            data.minBy { it.y },
-            data.maxBy { it.y }
-        )
+        Pair(data.minBy { it.y }, data.maxBy { it.y })
     }
 
     val density = LocalDensity.current
 
-    Canvas(modifier = modifier.fillMaxWidth().height(200.dp)) {  // Add fillMaxSize or specify a fixed size
+    Canvas(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(200.dp)
+    ) {  // Add fillMaxSize or specify a fixed size
         val spacePerHour = (size.width - spacing) / data.size
 
         var lastX = 0f
@@ -79,9 +80,7 @@ fun LineChart(
             }
         }
 
-        val fillPath = android.graphics.Path(strokePath.asAndroidPath())
-            .asComposePath()
-            .apply {
+        val fillPath = android.graphics.Path(strokePath.asAndroidPath()).asComposePath().apply {
                 lineTo(lastX, size.height - spacing)
                 lineTo(spacing, size.height - spacing)
                 close()
@@ -91,19 +90,14 @@ fun LineChart(
             path = fillPath,
             brush = Brush.verticalGradient(
                 colors = listOf(
-                    transparentGraphColor,
-                    Color.Transparent
-                ),
-                endY = size.height - spacing
+                    transparentGraphColor, Color.Transparent
+                ), endY = size.height - spacing
             ),
         )
 
         drawPath(
-            path = strokePath,
-            color = graphColor,
-            style = Stroke(
-                width = 2.dp.toPx(),
-                cap = StrokeCap.Round
+            path = strokePath, color = graphColor, style = Stroke(
+                width = 2.dp.toPx(), cap = StrokeCap.Round
             )
         )
 
@@ -114,9 +108,7 @@ fun LineChart(
             }
 
             drawPath(
-                path = dottedPath,
-                color = graphColor.copy(alpha = .8f),
-                style = Stroke(
+                path = dottedPath, color = graphColor.copy(alpha = .8f), style = Stroke(
                     width = 1.5.dp.toPx(),
                     cap = StrokeCap.Round,
                     pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 20f), 0f)

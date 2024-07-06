@@ -10,20 +10,22 @@ import javax.inject.Inject
 
 
 class StockDataUseCase @Inject constructor(
-    private val repository: StocksRepository,
-    private val context: Context
+    private val repository: StocksRepository, private val context: Context
 ) {
-    operator fun invoke(function: String, symbol: String , interval:String?): Flow<StateHandle<StockDataDTO>> = flow {
+    operator fun invoke(
+        function: String,
+        symbol: String,
+        interval: String?
+    ): Flow<StateHandle<StockDataDTO>> = flow {
 
         emit(StateHandle.Loading(null))
         try {
-            val stockData = repository.getStockData(function = function, symbol = symbol,interval = interval)
+            val stockData =
+                repository.getStockData(function = function, symbol = symbol, interval = interval)
             emit(StateHandle.Success(stockData))
-        }catch (e:RuntimeException)
-        {
+        } catch (e: RuntimeException) {
             emit(StateHandle.Error("API limit reached. Please try again later."))
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             emit(StateHandle.Error(e.message))
         }
     }

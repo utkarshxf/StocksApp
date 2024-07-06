@@ -3,16 +3,13 @@ package com.orion.templete.domain.use_case
 import android.content.Context
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.data.model.BestMatchesResponse
-import com.orion.templete.data.model.StockDataDTO
-import com.orion.templete.data.model.TopGainLoseDTO
 import com.orion.templete.domain.repository.StocksRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class TickerSearchUseCase @Inject constructor(
-    private val repository: StocksRepository,
-    private val context: Context
+    private val repository: StocksRepository, private val context: Context
 ) {
     operator fun invoke(symbol: String): Flow<StateHandle<BestMatchesResponse>> = flow {
 
@@ -20,12 +17,9 @@ class TickerSearchUseCase @Inject constructor(
         try {
             val searchedItem = repository.tickerSearch(symbol)
             emit(StateHandle.Success(searchedItem))
-        }
-        catch (e:RuntimeException)
-        {
+        } catch (e: RuntimeException) {
             emit(StateHandle.Error("API limit reached. Please try again later."))
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             emit(StateHandle.Error(e.message))
         }
     }

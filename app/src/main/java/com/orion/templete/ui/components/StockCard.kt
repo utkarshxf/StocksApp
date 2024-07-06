@@ -1,6 +1,5 @@
 package com.orion.templete.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -9,9 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,21 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.orion.templete.R
 import com.orion.templete.data.model.Gainer
 
 @Composable
-fun StockCard(StockCardData: Gainer, modifier: Modifier = Modifier) {
+fun StockCard(stockCardData: Gainer, modifier: Modifier = Modifier) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val screenHeight = configuration.screenHeightDp.dp
+
     Box(
         modifier = modifier
             .size(screenWidth / 2, screenHeight / 5)
@@ -42,36 +36,33 @@ fun StockCard(StockCardData: Gainer, modifier: Modifier = Modifier) {
                 color = MaterialTheme.colorScheme.primary,
                 width = 1.dp,
                 shape = RoundedCornerShape(12.dp)
-            ),
-        contentAlignment = Alignment.CenterStart
-    )
-    {
+            ), contentAlignment = Alignment.CenterStart
+    ) {
         Column(
-            modifier.padding(12.dp),
+            modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            AssetIcon(StockCardData.ticker)
+            AssetIcon(stockCardData.ticker)
             Spacer(modifier = Modifier.size(8.dp))
-            TickerName(StockCardData.ticker)
+            TickerName(stockCardData.ticker)
             Spacer(modifier = Modifier.size(16.dp))
-            ValueView(StockCardData.price.toFloat(), StockCardData.volume.toFloat())
+            ValueView(stockCardData.price.toFloat(), stockCardData.volume.toFloat())
         }
     }
 }
 
 @Composable
-private fun AssetIcon(word: String? = null) {
-    if (!word.isNullOrEmpty()) {
+private fun AssetIcon(ticker: String?) {
+    if (!ticker.isNullOrEmpty()) {
         Box(
             modifier = Modifier
                 .size(52.dp)
                 .clip(RoundedCornerShape(50))
-                .background(MaterialTheme.colorScheme.primary),
-            contentAlignment = Alignment.Center
+                .background(MaterialTheme.colorScheme.primary), contentAlignment = Alignment.Center
         ) {
             Text(
-                text = word.first().toString(),
+                text = ticker.first().toString(),
                 style = MaterialTheme.typography.displaySmall,
                 color = MaterialTheme.colorScheme.onPrimary,
             )
@@ -102,15 +93,15 @@ fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = "${currentValue.toString()}%",
+            text = "$currentValue%",
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
 
-        )
+            )
         Text(
             text = total.toString(),
             style = MaterialTheme.typography.labelSmall,
 
-        )
+            )
     }
 }

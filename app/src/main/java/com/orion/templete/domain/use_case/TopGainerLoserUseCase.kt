@@ -23,14 +23,13 @@ class TopGainerLoserUseCase @Inject constructor(
                 val topGainerLoser = repository.getTopGainerLoser()
                 val currentTime = System.currentTimeMillis()
                 topGainerLoser.lastUpdatedDate = System.currentTimeMillis()
-                topGainLoseDatabase.topGainLoseDao().deleteOldData(currentTime - ttl)   //delete expired data
+                topGainLoseDatabase.topGainLoseDao()
+                    .deleteOldData(currentTime - ttl)   //delete expired data
                 topGainLoseDatabase.topGainLoseDao().addTopGainLose(topGainerLoser)
                 emit(StateHandle.Success(topGainerLoser))
-            }catch (e:RuntimeException)
-            {
+            } catch (e: RuntimeException) {
                 emit(StateHandle.Error("API limit reached. Please try again later."))
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         } else {

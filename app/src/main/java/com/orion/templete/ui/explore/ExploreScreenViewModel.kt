@@ -6,59 +6,58 @@ import androidx.lifecycle.viewModelScope
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.domain.use_case.TickerSearchUseCase
 import com.orion.templete.domain.use_case.TopGainerLoserUseCase
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreScreenViewModel @Inject constructor(private val topGainerLoserUseCase: TopGainerLoserUseCase , private val searchTopGainerLoserUseCase:TickerSearchUseCase) :
-    ViewModel() {
+class ExploreScreenViewModel @Inject constructor(
+    private val topGainerLoserUseCase: TopGainerLoserUseCase,
+    private val searchTopGainerLoserUseCase: TickerSearchUseCase
+) : ViewModel() {
+
     val stateOfTopGainersLosers = mutableStateOf(ExploreScreenState())
     val searchedItems = mutableStateOf(SearchItemsState())
 
     init {
         getTopGainerLoser()
-//        searchStock("tesco")
     }
 
     private fun getTopGainerLoser() {
-        topGainerLoserUseCase().onEach {
-            when (it) {
+        topGainerLoserUseCase().onEach { result ->
+            when (result) {
                 is StateHandle.Loading -> {
                     stateOfTopGainersLosers.value = ExploreScreenState(isLoading = true)
                 }
 
                 is StateHandle.Success -> {
-                    stateOfTopGainersLosers.value = ExploreScreenState(data = it.data)
+                    stateOfTopGainersLosers.value = ExploreScreenState(data = result.data)
                 }
 
                 is StateHandle.Error -> {
                     stateOfTopGainersLosers.value =
-                        ExploreScreenState(error = it.message.toString())
+                        ExploreScreenState(error = result.message.toString())
                 }
             }
         }.launchIn(viewModelScope)
     }
-    fun searchStock(ticket : String) {
-        searchTopGainerLoserUseCase(ticket).onEach {
-            when (it) {
+
+    fun searchStock(ticket: String) {
+        searchTopGainerLoserUseCase(ticket).onEach { result ->
+            when (result) {
                 is StateHandle.Loading -> {
                     searchedItems.value = SearchItemsState(isLoading = true)
                 }
 
                 is StateHandle.Success -> {
-                    searchedItems.value = SearchItemsState(data = it.data)
+                    searchedItems.value = SearchItemsState(data = result.data)
                 }
 
                 is StateHandle.Error -> {
-                    searchedItems.value =
-                        SearchItemsState(error = it.message.toString())
+                    searchedItems.value = SearchItemsState(error = result.message.toString())
                 }
             }
         }.launchIn(viewModelScope)
     }
-
 }

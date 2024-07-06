@@ -37,10 +37,11 @@ import com.orion.templete.ui.components.StockCard
 @Composable
 fun ExploreScreen(
     viewModel: ExploreScreenViewModel = hiltViewModel(),
-    navigateToProductScreen:(data:String) -> Unit = {}
+    navigateToProductScreen: (data: String) -> Unit = {}
 ) {
     val state = viewModel.stateOfTopGainersLosers.value
-    var TopLosers by remember { mutableStateOf(false) }
+    var topLosers by remember { mutableStateOf(false) }
+
     Scaffold(topBar = {
         TopAppBar(
             title = { Text(text = "STOCKS APP") },
@@ -59,52 +60,52 @@ fun ExploreScreen(
                     Text(text = state.error)
                 }
             }
+
             state.data != null -> {
                 Column(modifier = Modifier.padding(it)) {
                     MySearchBar(navigateToProductScreen = navigateToProductScreen)
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(2), modifier = Modifier,
+                    LazyVerticalGrid(columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         content = {
                             val data =
-                                if (TopLosers) state.data.top_losers else state.data.top_gainers
-                            items(data)
-                            {
+                                if (topLosers) state.data.top_losers else state.data.top_gainers
+                            items(data) { stock ->
                                 Box(modifier = Modifier.clickable {
-                                    navigateToProductScreen(it.ticker)
-                                })
-                                {
-                                    StockCard(it)
+                                    navigateToProductScreen(stock.ticker)
+                                }) {
+                                    StockCard(stock)
                                 }
-
                             }
-                        },
-                    )
-                }
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.BottomCenter
-                )
-                {
-                    Row(
-                        verticalAlignment = Alignment.Bottom,
-                        horizontalArrangement = Arrangement.Center
+                        })
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.BottomCenter
                     ) {
-                        Button(
-                            onClick = { TopLosers = false }, modifier = Modifier
-                                .weight(1f)
-                                .height(52.dp), shape = RoundedCornerShape(0.dp)
+                        Row(
+                            verticalAlignment = Alignment.Bottom,
+                            horizontalArrangement = Arrangement.Center
                         ) {
-                            Text(text = "TOP GAINERS")
-                        }
-                        Button(
-                            onClick = { TopLosers = true }, modifier = Modifier
-                                .weight(1f)
-                                .height(52.dp), shape = RoundedCornerShape(0.dp)
-                        ) {
-                            Text(text = "TOP LOSERS")
+                            Button(
+                                onClick = { topLosers = false },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(52.dp),
+                                shape = RoundedCornerShape(0.dp)
+                            ) {
+                                Text(text = "TOP GAINERS")
+                            }
+                            Button(
+                                onClick = { topLosers = true },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(52.dp),
+                                shape = RoundedCornerShape(0.dp)
+                            ) {
+                                Text(text = "TOP LOSERS")
+                            }
                         }
                     }
                 }

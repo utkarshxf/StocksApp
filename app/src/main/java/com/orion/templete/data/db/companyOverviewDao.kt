@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.orion.templete.data.model.CompanyOverviewDTO
-import com.orion.templete.data.model.TopGainLoseDTO
 
 @Dao
 interface CompanyOverviewDao {

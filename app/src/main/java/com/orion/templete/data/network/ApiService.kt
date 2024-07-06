@@ -17,8 +17,7 @@ interface ApiService {
 
     @GET("query?function=OVERVIEW")
     suspend fun getCompanyOverview(
-        @Query("symbol") ticker: String = "DECAW",
-        @Query("apikey") apiKey: String = API_KEY
+        @Query("symbol") ticker: String = "DECAW", @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<CompanyOverviewDTO>
 
 
@@ -34,8 +33,7 @@ interface ApiService {
     //    https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo
     @GET("query?function=SYMBOL_SEARCH")
     suspend fun tickerSearch(
-        @Query("keywords") keywords: String = "tesco",
-        @Query("apikey") apiKey: String = API_KEY
+        @Query("keywords") keywords: String = "tesco", @Query("apikey") apiKey: String = API_KEY
     ): retrofit2.Response<BestMatchesResponse>
 
 

@@ -1,7 +1,6 @@
 package com.orion.templete.domain.use_case
 
 import android.content.Context
-import android.util.Log
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.data.db.CompanyOverviewDatabase
 import com.orion.templete.data.model.CompanyOverviewDTO
@@ -24,26 +23,27 @@ class CompanyOverviewUseCase @Inject constructor(
                 val companyOverview = repository.companyOverview(symbol)
                 companyOverview.lastUpdatedDate = System.currentTimeMillis()
                 val currentTime = System.currentTimeMillis()
-                companyOverviewDatabase.companyOverviewDao().deleteOldData(currentTime - ttl)   //delete expired data
-                companyOverviewDatabase.companyOverviewDao().addCompanyOverview(companyOverview.copy(symbol = symbol))
+                companyOverviewDatabase.companyOverviewDao()
+                    .deleteOldData(currentTime - ttl)   //delete expired data
+                companyOverviewDatabase.companyOverviewDao()
+                    .addCompanyOverview(companyOverview.copy(symbol = symbol))
                 emit(StateHandle.Success(companyOverview))
             } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         } else {
             try {
-                val companyOverview = companyOverviewDatabase.companyOverviewDao().getCompanyOverview(symbol)
+                val companyOverview =
+                    companyOverviewDatabase.companyOverviewDao().getCompanyOverview(symbol)
 
                 if (companyOverview != null && (System.currentTimeMillis() - companyOverview.lastUpdatedDate) <= ttl) {
                     emit(StateHandle.Success(companyOverview))
                 } else {
                     emit(StateHandle.Error("No internet connection and no cached data found."))
                 }
-            }catch (e:RuntimeException)
-            {
+            } catch (e: RuntimeException) {
                 emit(StateHandle.Error("API limit reached. Please try again later."))
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         }

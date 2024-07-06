@@ -7,8 +7,7 @@ import androidx.room.TypeConverters
 @Entity(tableName = "top_gain_lose")
 @TypeConverters(Converters::class)
 data class TopGainLoseDTO(
-    @PrimaryKey(autoGenerate = true)
-    val objectId:Int,
+    @PrimaryKey(autoGenerate = true) val objectId: Int,
     val metadata: String,
     val top_gainers: List<Gainer>,
     val top_losers: List<Gainer>,

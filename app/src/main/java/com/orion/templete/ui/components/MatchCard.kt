@@ -87,10 +87,7 @@ private fun ItemName(name: String, symbol: String) {
 
 @Composable
 private fun ValueDisplay(
-    region: String,
-    currency: String,
-    marketOpen: String,
-    marketClose: String
+    region: String, currency: String, marketOpen: String, marketClose: String
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
