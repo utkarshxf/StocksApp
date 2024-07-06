@@ -54,14 +54,14 @@ These endpoints used for all the required data:
 
 ## Features
 - View Top gainers and losers
-    -Open the app.
-    -click on TOP GAINERS / LOSERS Button.
+    - Open the app.
+    -> click on TOP GAINERS / LOSERS Button.
 - Searching for Stocks:
-    -Open the app.
-    -Use the search bar to find a specific stock by its symbol.
+    - Open the app.
+    -> Use the search bar to find a specific stock by its symbol.
 - Viewing Stock Details:
-    -Select a stock from the search results.
-    -View the stock's real-time data and historical charts.
+    - Select a stock from the search results.
+    -> View the stock's real-time data and historical charts.
 
 
 
