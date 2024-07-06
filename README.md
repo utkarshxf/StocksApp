@@ -69,6 +69,7 @@ These endpoints used for all the required data:
     - Select a stock from the search results.
     -> View the stock's real-time data and historical charts.
 
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/ee2c2b00-3a9e-45b2-ad10-7beaa6a21c17" width="200"/>
 
 
 
