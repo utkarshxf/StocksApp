@@ -19,7 +19,11 @@ class StockDataUseCase @Inject constructor(
         try {
             val stockData = repository.getStockData(function = function, symbol = symbol,interval = interval)
             emit(StateHandle.Success(stockData))
-        } catch (e: Exception) {
+        }catch (e:RuntimeException)
+        {
+            emit(StateHandle.Error("API limit reached. Please try again later."))
+        }
+        catch (e: Exception) {
             emit(StateHandle.Error(e.message))
         }
     }

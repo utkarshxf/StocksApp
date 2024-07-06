@@ -125,6 +125,14 @@ fun ProductScreen(
                                         showYLabels = true
                                     )
                                 }
+                                stateOfStockData.error.isNotBlank() -> {
+                                    Text(
+                                        modifier = Modifier.padding(16.dp),
+                                        text = stateOfStockData.error,
+                                        style = MaterialTheme.typography.displayMedium,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                }
                             }
                         }
                     }
@@ -346,7 +354,6 @@ private fun TickerName(name: String = "Apple Inc.", tickerName: String = "AAPL")
             text = name,
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2
         )

@@ -39,8 +39,12 @@ class CompanyOverviewUseCase @Inject constructor(
                 } else {
                     emit(StateHandle.Error("No internet connection and no cached data found."))
                 }
-            } catch (e: Exception) {
-                emit(StateHandle.Error("No internet connection and no cached data found."))
+            }catch (e:RuntimeException)
+            {
+                emit(StateHandle.Error("API limit reached. Please try again later."))
+            }
+            catch (e: Exception) {
+                emit(StateHandle.Error(e.message))
             }
         }
     }
