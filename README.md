@@ -3,7 +3,7 @@
   STOCKS App demonstrates modern Android development with Jetpack Compose, Hilt, Coroutines, Flow, Jetpack (Room, ViewModel), and Material Design based on MVVM architecture.
 </p>
 
-![previews/screenshot](https://github.com/utkarshxf/StocksApp/assets/78771861/ad7c810e-ddf5-450d-ba1d-264f80eb724e)
+ <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/ad7c810e-ddf5-450d-ba1d-264f80eb724e" width="200"/>
 
 ## Download
 
@@ -61,6 +61,8 @@ These endpoints used for all the required data:
 - Searching for Stocks:
     - Open the app.
     -> Use the search bar to find a specific stock by its symbol.
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/23024411-e961-4b90-893f-1522db9c55e5" width="200"/>
+
 - Viewing Stock Details:
     - Select a stock from the search results.
     -> View the stock's real-time data and historical charts.
