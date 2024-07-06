@@ -306,26 +306,32 @@ fun CompanyDetails(companyOverview: CompanyOverviewDTO) {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically)
         {
-            AssetIcon()
+            AssetIcon(companyOverview.Name)
             TickerName(companyOverview.Name, companyOverview.Exchange)
         }
-        ValueView(companyOverview.CIK.toFloat(), companyOverview.BookValue.toFloat())
+        ValueView(companyOverview.CIK, companyOverview.BookValue)
     }
 }
 
 
 @Composable
-private fun AssetIcon(iconDrawable: Int = R.drawable.app_icon) {
+private fun AssetIcon(word: String) {
 
-    Image(
-        modifier = Modifier
-            .size(64.dp)
-            .padding(8.dp)
-            .clip(RoundedCornerShape(50)),
-        contentScale = ContentScale.Crop,
-        painter = painterResource(iconDrawable),
-        contentDescription = null
-    )
+    if (!word.isNullOrEmpty()) {
+        Box(
+            modifier = Modifier
+                .size(52.dp)
+                .clip(RoundedCornerShape(50))
+                .background(MaterialTheme.colorScheme.primary),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = word.first().toString(),
+                style = MaterialTheme.typography.displaySmall,
+                color = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
+    }
 
 }
 
@@ -349,7 +355,7 @@ private fun TickerName(name: String = "Apple Inc.", tickerName: String = "AAPL")
 }
 
 @Composable
-fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
+fun ValueView(currentValue: String , total: String) {
     Column(
         modifier = Modifier
             .padding(start = 10.dp),
@@ -362,7 +368,7 @@ fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
             color = Color.Black
         )
         Text(
-            text = "$${total.toInt()}",
+            text = "$${total}",
             style = MaterialTheme.typography.labelSmall,
             color = Color.Gray
         )
