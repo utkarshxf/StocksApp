@@ -3,7 +3,8 @@
   STOCKS App demonstrates modern Android development with Jetpack Compose, Hilt, Coroutines, Flow, Jetpack (Room, ViewModel), and Material Design based on MVVM architecture.
 </p>
 <p align="center">
-<img src="previews/screenshot.png"/>
+<img src="[previews/screenshot.png](https://github.com/utkarshxf/StocksApp/assets/78771861/7fca6ccc-3de7-4954-b3f4-39df91cccb69)"/>
+
 </p>
 
 ## Download
