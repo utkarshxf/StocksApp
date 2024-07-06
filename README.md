@@ -86,4 +86,13 @@ These endpoints used for all the required data:
  
       <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/f34d218f-45fe-476b-8822-1f479136c6e9" width="200"/>
 
+## Screens
 
+### Light Mode
+<img src="https://github.com/utkarshxf/StocksApp/assets/78771861/0f81a58e-d0a4-4aa7-adaf-0b7919b84ccd" width="200"/>
+<img src="https://github.com/utkarshxf/StocksApp/assets/78771861/2d9c26b4-30ae-4a8b-92a6-b5ffe5454d78" width="200"/>
+
+### Dark Mode
+
+<img src="https://github.com/utkarshxf/StocksApp/assets/78771861/778c3e41-7452-42bc-8adf-37c4bd139762" width="200"/>
+<img src="https://github.com/utkarshxf/StocksApp/assets/78771861/ca1b7f41-f3ff-41c3-a2bf-12858999f443" width="200"/>
