@@ -9,6 +9,7 @@
 
 Go to the [Releases](https:??) to download the latest APK.
 <img src="previews/preview.gif" align="right" width="320"/>
+
 Go to  [Features](#features) Section to know how Stocks App work.
 
 ## Tech stack & Open-source libraries
