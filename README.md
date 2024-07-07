@@ -35,7 +35,7 @@ The architecture of **STOCKS App** is structured into three distinct layers: the
 - The data layer operates autonomously from other layers, maintaining purity without dependencies on external layers.
 - This loosely coupled architecture enhances component reusability and app scalability, facilitating seamless development and maintenance.
 
-```mermaid
+```sql
 project_root
 ├── data
 │   ├── db
