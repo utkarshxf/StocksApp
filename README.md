@@ -7,7 +7,7 @@
 
 ## Download
 
-Go to the [Releases](https:??) to download the latest APK.
+Go to the [Releases](https://drive.google.com/drive/folders/1_B6eAH8-0WG0252pPXC6L6kzO9XndHAO) to download the latest APK.
 <img src="previews/preview.gif" align="right" width="320"/>
 
 Go to  [Features](#features) Section to know how Stocks App work.
