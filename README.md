@@ -35,14 +35,42 @@ The architecture of **STOCKS App** is structured into three distinct layers: the
 - The data layer operates autonomously from other layers, maintaining purity without dependencies on external layers.
 - This loosely coupled architecture enhances component reusability and app scalability, facilitating seamless development and maintenance.
 
+```mermaid
+project_root
+├── data
+│   ├── db
+│   ├── model
+│   ├── network
+│   └── repository
+├── di
+├── domain
+│   ├── repository
+│   └── use_case
+├── ui
+│   ├── explore
+│   │   ├── components
+│   │   ├── ExploreScreen.kt
+│   │   └── ExploreScreenViewModel.kt
+│   ├── product
+│   │   ├── components
+│   │   ├── ProductScreen.kt
+│   │   └── ProductScreenViewModel.kt
+│   └── theme
+├── util
+└── build
+```
+
 ### UI Layer
 The UI layer encompasses UI elements responsible for configuring screens for user interaction, alongside the [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), which manages app states and restores data during configuration changes.
 - UI elements observe the data flow, ensuring synchronization with the underlying data layer.
 
 ### Domain Layer
+The domain layer is responsible for encapsulating the core business logic of the application. This layer acts as an intermediary between the UI and data layers, ensuring that data is processed and business rules are enforced before being presented to the user.
+
 
 ### Data Layer
 The data layer is composed of repositories that handle business logic tasks such as retrieving data from a local database or fetching remote data from a network. This layer is designed to prioritize online access, functioning primarily as an online-first repository of business logic. It adheres to the principle of "single source of truth," ensuring that all data operations are centralized and consistent.<br>
+<img src="https://github.com/utkarshxf/StocksApp/assets/78771861/eafd6ef2-a710-4b0e-8595-22e1be03b519"/>
 
 ## Data API
 
