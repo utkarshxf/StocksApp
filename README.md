@@ -72,6 +72,24 @@ The domain layer is responsible for encapsulating the core business logic of the
 The data layer is composed of repositories that handle business logic tasks such as retrieving data from a local database or fetching remote data from a network. This layer is designed to prioritize online access, functioning primarily as an online-first repository of business logic. It adheres to the principle of "single source of truth," ensuring that all data operations are centralized and consistent.<br>
 <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/eafd6ef2-a710-4b0e-8595-22e1be03b519"/>
 
+## Local Database
+The local database in our application serves as a crucial component for data persistence and offline access. It ensures that users have a seamless experience even when the app is offline or the API rate limit is exceeded. Here are some key features and implementations of our local database:
+
+### Time-To-Live (TTL)
+We implement a Time-To-Live (TTL) mechanism in our local database to ensure data freshness and relevance. Each record in the database has associated createdDate and lastUpdatedDate timestamps. These timestamps help determine whether the data is still valid or if it needs to be refreshed from the remote source. The TTL logic is handled manually by checking the age of the data before serving it to the user. If the data is stale, a fresh fetch from the remote source is initiated.
+
+### Handling API Rate Limits and Offline Mode
+To provide a robust user experience, our application is designed to handle scenarios where the API rate limit is exceeded or the app is offline. Here’s how we achieve this:
+
+### API Rate Limit Handling:
+
+Caching Strategy: When the API rate limit is exceeded, the application switches to a caching strategy, serving data from the local database to avoid disruptions.
+Fallback Mechanism: The app detects when the API rate limit is reached and gracefully falls back to using the cached data stored locally.
+Offline Mode Support:
+
+Data Synchronization: The application syncs data with the remote server whenever the network becomes available, ensuring that the local database stays updated.
+Local Storage: Critical data is stored locally using Room, an Android persistence library, to maintain app functionality even when offline. Users can continue to access and interact with the app without needing an active internet connection.
+
 ## Data API
 
 STOCKS App using the [Alphavantage](https://www.alphavantage.co) for constructing RESTful API.<br>
