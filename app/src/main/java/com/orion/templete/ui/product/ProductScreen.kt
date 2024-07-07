@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -94,7 +96,8 @@ fun ProductScreen(
         stateOfCompanyOverview.data != null -> {
             Scaffold(topBar = {
                 TopAppBar(
-                    title = { Text(text = stringResource(R.string.product_screen)) }, modifier = Modifier.border(
+                    title = { Text(text = stringResource(R.string.product_screen)) },
+                    modifier = Modifier.border(
                         color = MaterialTheme.colorScheme.primary, width = 1.dp
                     )
                 )
@@ -109,7 +112,7 @@ fun ProductScreen(
                     }
                     item {
                         AnimatedVisibility(
-                            visible = stateOfStockData.data != null, exit = ExitTransition.None
+                            visible = stateOfStockData.data != null || stateOfStockData.error.isNotBlank()
                         ) {
                             when {
                                 stateOfStockData.data != null -> {
@@ -120,12 +123,12 @@ fun ProductScreen(
                                         showYLabels = true
                                     )
                                 }
-
                                 stateOfStockData.error.isNotBlank() -> {
                                     Text(
-                                        modifier = Modifier.padding(16.dp),
-                                        text = stateOfStockData.error,
-                                        style = MaterialTheme.typography.displayMedium,
+                                        modifier = Modifier
+                                            .padding(16.dp),
+                                        text = stringResource(R.string.unable_to_fatch_data_try_again_later),
+                                        style = MaterialTheme.typography.labelMedium,
                                         color = MaterialTheme.colorScheme.error
                                     )
                                 }
@@ -193,7 +196,8 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
 
         Spacer(modifier = Modifier.size(16.dp))
         SectionTitle(
-            title = "Company Overview", modifier = Modifier.padding(defaultHorizontalPadding)
+            title = stringResource(R.string.company_overview),
+            modifier = Modifier.padding(defaultHorizontalPadding)
         )
         Column(
             modifier = Modifier
@@ -246,7 +250,8 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
                 name = stringResource(R.string.beta), value = companyOverview.Beta
             )
             SectionInfoItem(
-                name = stringResource(R.string.dividend_yield), value = companyOverview.DividendYield
+                name = stringResource(R.string.dividend_yield),
+                value = companyOverview.DividendYield
             )
             SectionInfoItem(
                 name = stringResource(R.string.profit_margin), value = companyOverview.ProfitMargin
@@ -258,22 +263,27 @@ fun AboutCompany(companyOverview: CompanyOverviewDTO) {
                 name = stringResource(R.string.address), value = companyOverview.Address
             )
             SectionInfoItem(
-                name = stringResource(R.string.fiscal_year_end), value = companyOverview.FiscalYearEnd
+                name = stringResource(R.string.fiscal_year_end),
+                value = companyOverview.FiscalYearEnd
             )
             SectionInfoItem(
-                name = stringResource(R.string.latest_quarter), value = companyOverview.LatestQuarter
+                name = stringResource(R.string.latest_quarter),
+                value = companyOverview.LatestQuarter
             )
             SectionInfoItem(
                 name = stringResource(R.string.ebitda), value = companyOverview.EBITDA.toString()
             )
             SectionInfoItem(
-                name = stringResource(R.string.peg_ratio), value = companyOverview.PEGRatio.toString()
+                name = stringResource(R.string.peg_ratio),
+                value = companyOverview.PEGRatio.toString()
             )
             SectionInfoItem(
-                name = stringResource(R.string.book_value), value = companyOverview.BookValue.toString()
+                name = stringResource(R.string.book_value),
+                value = companyOverview.BookValue.toString()
             )
             SectionInfoItem(
-                name = stringResource(R.string.dividend_per_share), value = companyOverview.DividendPerShare.toString()
+                name = stringResource(R.string.dividend_per_share),
+                value = companyOverview.DividendPerShare.toString()
             )
             SectionInfoItem(
                 name = stringResource(R.string.eps), value = companyOverview.EPS.toString()

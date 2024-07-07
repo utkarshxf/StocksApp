@@ -11,9 +11,9 @@ data class CompanyOverviewDTO(
     @SerializedName("Symbol")
     val symbol: String,
     @SerializedName("200DayMovingAverage")
-    val movingAverage200Day: String,
+    val movingAverage200Day: String?,
     @SerializedName("50DayMovingAverage")
-    val movingAverage50Day: String,
+    val movingAverage50Day: String?,
     @SerializedName("52WeekHigh")
     val weekHigh52: String,
     @SerializedName("52WeekLow")

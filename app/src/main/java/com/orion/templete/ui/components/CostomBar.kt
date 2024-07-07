@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DisplayBar(leftText: String = "null", middleText: String = "null", rightText: String = "null") {
+fun DisplayBar(leftText: String? = "null", middleText: String = "null", rightText: String = "null") {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(16.dp)
     ) {
@@ -42,7 +42,7 @@ fun DisplayBar(leftText: String = "null", middleText: String = "null", rightText
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = leftText, style = MaterialTheme.typography.bodySmall
+                text = leftText?:"", style = MaterialTheme.typography.bodySmall
             )
             Spacer(
                 modifier = Modifier

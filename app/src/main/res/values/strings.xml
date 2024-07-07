@@ -36,4 +36,8 @@
     <string name="book_value">Book Value</string>
     <string name="dividend_per_share">Dividend Per Share</string>
     <string name="eps">EPS</string>
+    <string name="company_overview">Company Overview</string>
+    <string name="unable_to_fatch_data_try_again_later">Unable to fatch data try again later</string>
+    <string name="api_limit_exceeded_and_catch_is_not_found">"Api Limit Exceeded and Catch is not found "</string>
+    <string name="data_not_found">Data Not Found</string>
 </resources>

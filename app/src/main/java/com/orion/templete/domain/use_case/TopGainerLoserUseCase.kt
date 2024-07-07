@@ -29,7 +29,13 @@ class TopGainerLoserUseCase @Inject constructor(
                 topGainLoseDatabase.topGainLoseDao().addTopGainLose(topGainerLoser)
                 emit(StateHandle.Success(topGainerLoser))
             } catch (e: RuntimeException) {
-                emit(StateHandle.Error("API limit reached. Please try again later."))
+//                emit(StateHandle.Error("API limit reached. Please try again later."))
+                    val topGainerLoser = topGainLoseDatabase.topGainLoseDao().getTopGainLose()
+                    if (topGainerLoser != null && (System.currentTimeMillis() - topGainerLoser.lastUpdatedDate) <= ttl) {
+                    emit(StateHandle.Success(topGainerLoser))
+                    } else {
+                    emit(StateHandle.Error(context.getString(R.string.data_not_found)))
+                    }
             } catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }

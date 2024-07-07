@@ -29,22 +29,29 @@ class CompanyOverviewUseCase @Inject constructor(
                 companyOverviewDatabase.companyOverviewDao()
                     .addCompanyOverview(companyOverview.copy(symbol = symbol))
                 emit(StateHandle.Success(companyOverview))
-            } catch (e: Exception) {
+            }catch (e: RuntimeException) {
+//                emit(StateHandle.Error(context.getString(R.string.api_limit_reached_please_try_again_later)))
+                val companyOverview =
+                    companyOverviewDatabase.companyOverviewDao().getCompanyOverview(symbol)
+                if (companyOverview != null && (System.currentTimeMillis() - companyOverview.lastUpdatedDate) <= ttl) {
+                    emit(StateHandle.Success(companyOverview))
+                } else {
+                    emit(StateHandle.Error(context.getString(R.string.data_not_found)))
+                }
+            }
+            catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         } else {
             try {
                 val companyOverview =
                     companyOverviewDatabase.companyOverviewDao().getCompanyOverview(symbol)
-
                 if (companyOverview != null && (System.currentTimeMillis() - companyOverview.lastUpdatedDate) <= ttl) {
                     emit(StateHandle.Success(companyOverview))
                 } else {
                     emit(StateHandle.Error(context.getString(R.string.no_internet_connection_and_no_cached_data_found)))
                 }
-            } catch (e: RuntimeException) {
-                emit(StateHandle.Error(context.getString(R.string.api_limit_reached_please_try_again_later)))
-            } catch (e: Exception) {
+            }catch (e: Exception) {
                 emit(StateHandle.Error(e.message))
             }
         }
