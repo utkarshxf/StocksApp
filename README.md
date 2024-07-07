@@ -71,12 +71,12 @@ These endpoints used for all the required data:
     - Select a stock from the search results.
     -> View the stock's real-time data and historical charts.
 
-      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/ee2c2b00-3a9e-45b2-ad10-7beaa6a21c17" width="200"/>
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/c7c555a8-dc13-443b-9e71-dd65fd84da7e" width="200"/>
 
 - Offline Mode
     - Data Catch in local Database.
       
-      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/57a58922-f947-4949-ab01-a59dee0b2ea5" width="200"/>
+      <img src="https://github.com/utkarshxf/StocksApp/assets/78771861/8261f62d-cf10-43a7-92ec-6d8e7511338f" width="200"/>
 
     - TTL Catched Data
       
