@@ -32,8 +32,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.orion.templete.R
-import com.orion.templete.ui.components.MySearchBar
-import com.orion.templete.ui.components.StockCard
+import com.orion.templete.ui.explore.components.MySearchBar
+import com.orion.templete.ui.explore.components.StockCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

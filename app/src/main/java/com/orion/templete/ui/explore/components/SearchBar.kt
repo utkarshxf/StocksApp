@@ -1,4 +1,4 @@
-package com.orion.templete.ui.components
+package com.orion.templete.ui.explore.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll

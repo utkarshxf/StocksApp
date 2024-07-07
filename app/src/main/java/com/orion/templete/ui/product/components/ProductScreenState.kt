@@ -1,4 +1,4 @@
-package com.orion.templete.ui.product
+package com.orion.templete.ui.product.components
 
 import com.orion.templete.data.model.CompanyOverviewDTO
 import com.orion.templete.data.model.StockDataDTO

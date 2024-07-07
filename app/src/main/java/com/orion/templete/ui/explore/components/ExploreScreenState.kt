@@ -1,4 +1,4 @@
-package com.orion.templete.ui.explore
+package com.orion.templete.ui.explore.components
 
 import com.orion.templete.data.model.BestMatchesResponse
 import com.orion.templete.data.model.TopGainLoseDTO

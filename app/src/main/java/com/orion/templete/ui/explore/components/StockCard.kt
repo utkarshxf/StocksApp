@@ -1,4 +1,4 @@
-package com.orion.templete.ui.components
+package com.orion.templete.ui.explore.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,13 +21,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.orion.templete.data.model.Match
+import com.orion.templete.data.model.Gainer
 
 @Composable
-fun MatchCard(match: Match, modifier: Modifier = Modifier) {
+fun StockCard(stockCardData: Gainer, modifier: Modifier = Modifier) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val screenHeight = configuration.screenHeightDp.dp
+
     Box(
         modifier = modifier
             .size(screenWidth / 2, screenHeight / 5)
@@ -39,22 +39,22 @@ fun MatchCard(match: Match, modifier: Modifier = Modifier) {
             ), contentAlignment = Alignment.CenterStart
     ) {
         Column(
-            modifier.padding(12.dp),
+            modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            DisplayIcon(match.name)
+            AssetIcon(stockCardData.ticker)
             Spacer(modifier = Modifier.size(8.dp))
-            ItemName(match.name, match.symbol)
+            TickerName(stockCardData.ticker)
             Spacer(modifier = Modifier.size(16.dp))
-            ValueDisplay(match.region, match.currency, match.marketOpen, match.marketClose)
+            ValueView(stockCardData.price.toFloat(), stockCardData.volume.toFloat())
         }
     }
 }
 
 @Composable
-private fun DisplayIcon(word: String? = null) {
-    if (!word.isNullOrEmpty()) {
+private fun AssetIcon(ticker: String?) {
+    if (!ticker.isNullOrEmpty()) {
         Box(
             modifier = Modifier
                 .size(52.dp)
@@ -62,7 +62,7 @@ private fun DisplayIcon(word: String? = null) {
                 .background(MaterialTheme.colorScheme.primary), contentAlignment = Alignment.Center
         ) {
             Text(
-                text = word.first().toString(),
+                text = ticker.first().toString(),
                 style = MaterialTheme.typography.displaySmall,
                 color = MaterialTheme.colorScheme.onPrimary,
             )
@@ -70,48 +70,38 @@ private fun DisplayIcon(word: String? = null) {
     }
 }
 
+
 @Composable
-private fun ItemName(name: String, symbol: String) {
+private fun TickerName(name: String = "Apple Inc.", tickerName: String = "AAPL") {
     Row(
         modifier = Modifier
     ) {
         Text(
-            text = name, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold,
-
-            overflow = TextOverflow.Ellipsis, maxLines = 2
+            text = name,
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2
         )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = symbol, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
+        Text(text = tickerName, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
     }
 }
 
 @Composable
-private fun ValueDisplay(
-    region: String, currency: String, marketOpen: String, marketClose: String
-) {
+fun ValueView(currentValue: Float = 113.02211f, total: Float = 1356f) {
     Column(
         horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = "Region: $region",
+            text = "$currentValue%",
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold,
 
             )
         Text(
-            text = "Currency: $currency",
+            text = total.toString(),
             style = MaterialTheme.typography.labelSmall,
-            color = Color.Gray
-        )
-        Text(
-            text = "Market Open: $marketOpen",
-            style = MaterialTheme.typography.labelSmall,
-            color = Color.Gray
-        )
-        Text(
-            text = "Market Close: $marketClose",
-            style = MaterialTheme.typography.labelSmall,
-            color = Color.Gray
-        )
+
+            )
     }
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.domain.use_case.CompanyOverviewUseCase
 import com.orion.templete.domain.use_case.StockDataUseCase
+import com.orion.templete.ui.product.components.ProductScreenState
+import com.orion.templete.ui.product.components.StockDataScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

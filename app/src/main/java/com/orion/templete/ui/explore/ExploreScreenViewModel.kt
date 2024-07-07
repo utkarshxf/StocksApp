@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.orion.newsapp.util.StateHandle
 import com.orion.templete.domain.use_case.TickerSearchUseCase
 import com.orion.templete.domain.use_case.TopGainerLoserUseCase
+import com.orion.templete.ui.explore.components.ExploreScreenState
+import com.orion.templete.ui.explore.components.SearchItemsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
